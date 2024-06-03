@@ -28,8 +28,7 @@ class SendComplaintMail implements ShouldQueue
      */
     public function handle(): void
     {
-        $komplains = Komplain::where('created_at', '=', now())
-                            ->where('id_status', '=', 1) // Misalnya Anda ingin filter berdasarkan id_status
+        $komplains = Komplain::where('id_status', '=', 1) // Misalnya Anda ingin filter berdasarkan id_status
                             ->where('id_level', '=', 1)  // Misalnya Anda ingin filter berdasarkan id_level
                             ->get();
         
