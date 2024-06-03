@@ -26,6 +26,6 @@ class SendComplainMails extends Command
      */
     public function handle()
     {
-        //
+        dispatch(new SendComplaintMail());
     }
 }
