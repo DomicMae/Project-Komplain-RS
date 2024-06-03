@@ -22,6 +22,7 @@ use Inertia\Inertia;
 Route::get('/indexCSO', [KomplainController::class, 'index'])->middleware(['auth', 'verified','role:adminCSO'])->name('index'); //Dashboard Admin CSO 
 Route::get('/indexKepalaRuang', [KomplainController::class, 'indexKepalaRuang'])->middleware(['auth', 'verified', 'role:adminKepalaRuang'])->name('indexKepalaRuang'); //Dashboard Admin Kepala Ruang
 Route::get('/indexKepalaBidang', [KomplainController::class, 'indexKepalaBidang'])->middleware(['auth', 'verified', 'role:adminKepalaBidang'])->name('indexKepalaBidang'); //Dashboard Admin Kepala Bidang
+Route::get('/indexDirektur', [KomplainController::class, 'indexDirektur'])->middleware(['auth', 'verified', 'role:adminDirektur'])->name('indexDirektur'); //Dashboard Admin Kepala Bidang
 
 Route::get('/daftarKomplain', [KomplainController::class, 'DaftarKomplain'])->middleware(['auth', 'verified'])->name('daftarKomplain'); //Daftar Komplain Admin untuk CSO
 Route::get('/daftarKomplainKepalaRuang', [KomplainController::class, 'DaftarKomplainKepalaRuang'])->middleware(['auth', 'verified', 'role:adminKepalaRuang'])->name('daftarKomplainKepalaRuang'); //Daftar Komplain Admin untuk Kepala Ruang

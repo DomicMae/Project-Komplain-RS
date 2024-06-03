@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\CountdownCSO;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Komplain;
-use App\Mail\CountdownCSO;
 use Illuminate\Support\Facades\Mail;
 
 class SendComplaintMail implements ShouldQueue
