@@ -1,0 +1,30 @@
+/* Style untuk input waktu */
+input[type="time"] {
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+/* Style untuk input waktu saat dihover */
+input[type="time"]:hover {
+    border-color: #a5a5a5;
+}
+
+/* Style untuk input waktu saat fokus */
+input[type="time"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 1px #4a90e2;
+}
+
+/* Style untuk placeholder */
+::placeholder {
+    color: #a5a5a5;
+}
+
+/* Style untuk input waktu saat diaktifkan */
+input[type="time"]:enabled {
+    cursor: pointer;
+}
