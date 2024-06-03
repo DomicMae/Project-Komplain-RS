@@ -31,12 +31,12 @@ class SendComplaintMail implements ShouldQueue
         $komplains = Komplain::where('id_status', '=', 1) // Misalnya Anda ingin filter berdasarkan id_status
                             ->where('id_level', '=', 1)  // Misalnya Anda ingin filter berdasarkan id_level
                             ->get();
-        
+
         // Jika tidak ada komplain yang memenuhi kriteria, keluar dari fungsi
         if ($komplains->isEmpty()) {
             return;
         }
-    
+
         foreach ($komplains as $komplain) {
             $data_email = [
                 'jenis_pasien' => $komplain->jenis_pasien,
@@ -44,10 +44,10 @@ class SendComplaintMail implements ShouldQueue
                 'judul' => $komplain->judul,
                 'kronologi' => $komplain->kronologi,
             ];
-    
+
             // Kirim email dengan data yang disiapkan
             Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new CountdownCSO($data_email));
-    
+
             // Set status email_sent menjadi true setelah email dikirim
             $komplain->update(['email_sent' => true]);
         }
