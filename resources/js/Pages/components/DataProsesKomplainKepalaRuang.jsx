@@ -28,7 +28,7 @@ const DataProsesKomplainKepalaRuang = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/dataProsesKomplainLevelHijau`
+                    `http://193.168.195.191/api/dataProsesKomplainLevelHijau`
                 );
                 let sortedKomplain = response.data;
 

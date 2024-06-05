@@ -27,7 +27,7 @@ const DataDaftarKomplainKepalaBidang = ({ user }) => {
     const handleTrashClick = async (id) => {
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/hapuskomplain",
+                "http://193.168.195.191/api/hapuskomplain",
                 { id }
             );
             console.log(response.data);
@@ -41,7 +41,7 @@ const DataDaftarKomplainKepalaBidang = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/dataKomplainLevelMerah`
+                    `http://193.168.195.191/api/dataKomplainLevelMerah`
                 );
                 let sortedKomplain = response.data;
 

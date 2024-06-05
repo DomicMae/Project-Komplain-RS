@@ -36,7 +36,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editUnit", formDataToSend)
+            .post("http://193.168.195.191/api/editUnit", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -80,7 +80,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/reply",
+                "http://193.168.195.191/api/reply",
                 formData,
                 {
                     headers: {
@@ -113,7 +113,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editStatus", formDataToSend)
+            .post("http://193.168.195.191/api/editStatus", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -138,7 +138,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
 
         const tanggalUpdate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         axios
-            .post("http://127.0.0.1:8000/api/prosesLiveTracking", {
+            .post("http://193.168.195.191/api/prosesLiveTracking", {
                 idKomplain: komplainId,
                 tanggal_update: tanggalUpdate,
             })
@@ -220,7 +220,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         };
 
         axios
-            .post(`http://127.0.0.1:8000/api/addCountdown`, formDataToSend)
+            .post(`http://193.168.195.191/api/addCountdown`, formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -235,7 +235,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
         axios
-            .get(`http://127.0.0.1:8000/api/showCountdown/${id}`)
+            .get(`http://193.168.195.191/api/showCountdown/${id}`)
             .then((response) => {
                 const { tanggal_update } = response.data;
                 const start = new Date(); // Mendapatkan tanggal dan waktu saat ini
@@ -296,12 +296,12 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/dataKomplainKepalaBidang/${id}`
+                    `http://193.168.195.191/api/dataKomplainKepalaBidang/${id}`
                 );
                 setKomplainDetail(response.data);
 
                 const levelResponse = await axios.get(
-                    `http://127.0.0.1:8000/api/countdown_level/${response.data.namaLevel}`
+                    `http://193.168.195.191/api/countdown_level/${response.data.namaLevel}`
                 );
                 const duration = levelResponse.data[0].durasi;
 

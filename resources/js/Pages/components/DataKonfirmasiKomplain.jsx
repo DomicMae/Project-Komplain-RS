@@ -126,7 +126,7 @@ const DataKonfirmasiKomplain = ({ title, description }) => {
         ); // Set gambar menjadi null jika tidak diisi
 
         axios
-            .post("http://127.0.0.1:8000/api/komplainSS", formDataToSend)
+            .post("http://193.168.195.191/api/komplainSS", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 setApiResponse(response.data);

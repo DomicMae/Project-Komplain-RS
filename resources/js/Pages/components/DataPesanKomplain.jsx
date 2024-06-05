@@ -42,7 +42,7 @@ const DataPesanKomplain = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editUnit", formDataToSend)
+            .post("http://193.168.195.191/api/editUnit", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -102,7 +102,7 @@ const DataPesanKomplain = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editLevel", formDataToSend)
+            .post("http://193.168.195.191/api/editLevel", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -130,7 +130,7 @@ const DataPesanKomplain = ({ user }) => {
 
         const tanggalUpdate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         axios
-            .post("http://127.0.0.1:8000/api/prosesLiveTracking", {
+            .post("http://193.168.195.191/api/prosesLiveTracking", {
                 idKomplain: komplainId,
                 tanggal_update: tanggalUpdate,
             })
@@ -156,9 +156,9 @@ const DataPesanKomplain = ({ user }) => {
 
         let apiUrl;
         if (penerima.includes("Kepala Ruang")) {
-            apiUrl = "http://127.0.0.1:8000/api/sendemailToKepalaRuang";
+            apiUrl = "http://193.168.195.191/api/sendemailToKepalaRuang";
         } else if (penerima.includes("Kepala Bidang")) {
-            apiUrl = "http://127.0.0.1:8000/api/sendemailToKepalaBidang";
+            apiUrl = "http://193.168.195.191/api/sendemailToKepalaBidang";
         } else {
             console.error("Penerima tidak valid:", penerima);
             return;
@@ -209,7 +209,7 @@ const DataPesanKomplain = ({ user }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/reply",
+                "http://193.168.195.191/api/reply",
                 formData,
                 {
                     headers: {
@@ -244,7 +244,7 @@ const DataPesanKomplain = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editStatus", formDataToSend)
+            .post("http://193.168.195.191/api/editStatus", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -262,7 +262,7 @@ const DataPesanKomplain = ({ user }) => {
             const fetchData = async () => {
                 try {
                     const response = await axios.get(
-                        `http://127.0.0.1:8000/api/dataKomplainById/${id}`
+                        `http://193.168.195.191/api/dataKomplainById/${id}`
                     );
                     setKomplainDetail(response.data);
                 } catch (error) {

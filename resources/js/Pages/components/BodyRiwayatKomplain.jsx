@@ -24,7 +24,7 @@ const BodyRiwayatKomplain = ({ user }) => {
             : no_telp;
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/dataKomplainNoTelp/${modifiedNoTelp}`
+                `http://193.168.195.191/api/dataKomplainNoTelp/${modifiedNoTelp}`
             );
             const data = response.data;
             setDaftarKomplain(data);

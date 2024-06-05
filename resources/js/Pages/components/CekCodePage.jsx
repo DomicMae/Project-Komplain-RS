@@ -49,7 +49,7 @@ const CekCodePage = ({ title, description }) => {
 
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/livetracking/${liveTrackingCode}`
+                `http://193.168.195.191/api/livetracking/${liveTrackingCode}`
                 // `http://localhost/laract10/public/api/livetracking/${liveTrackingCode}`
             );
             setKodeData(response.data.kode);
@@ -63,7 +63,7 @@ const CekCodePage = ({ title, description }) => {
 
             // Mendapatkan data komplain berdasarkan ID komplain
             const komplainResponse = await axios.get(
-                `http://127.0.0.1:8000/api/dataLivetracking/${idKomplain}`
+                `http://193.168.195.191/api/dataLivetracking/${idKomplain}`
             );
             setLiveTracking(komplainResponse.data);
             // Menampilkan data komplain di tampilan
@@ -78,7 +78,7 @@ const CekCodePage = ({ title, description }) => {
 
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/livetracking/${liveTrackingCode}`
+                `http://193.168.195.191/api/livetracking/${liveTrackingCode}`
             );
 
             setKodeData(response.data.kode);
@@ -86,7 +86,7 @@ const CekCodePage = ({ title, description }) => {
             // Cek apakah ada laporan dalam respons data.kode
             if (response.data.kode.laporan) {
                 // Konstruksi URL lengkap ke file laporan
-                const baseUrl = "http://127.0.0.1:8000/uploads"; // Ubah sesuai dengan URL server Anda
+                const baseUrl = "http://193.168.195.191/uploads"; // Ubah sesuai dengan URL server Anda
                 const laporanUrl = `${baseUrl}/${response.data.kode.laporan}`;
 
                 // Buka laporan PDF di Google Chrome
@@ -127,7 +127,7 @@ const CekCodePage = ({ title, description }) => {
         formDataToSend.append("keterangan", reply);
 
         axios
-            .post("http://127.0.0.1:8000/api/addkomplain", formDataToSend)
+            .post("http://193.168.195.191/api/addkomplain", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 setApiResponse(response.data);
@@ -153,7 +153,7 @@ const CekCodePage = ({ title, description }) => {
     };
     const sendEmail = () => {
         axios
-            .get("http://127.0.0.1:8000/api/sendemailCSOAgain")
+            .get("http://193.168.195.191/api/sendemailCSOAgain")
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);

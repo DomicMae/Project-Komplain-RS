@@ -12,7 +12,7 @@ const DashboardAdminCSO = ({ user }) => {
                 const today = new Date();
                 const formattedDate = today.toISOString().split("T")[0]; // Mendapatkan tanggal hari ini dan memformatnya sebagai YYYY-MM-DD
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/countkomplain/${formattedDate}`
+                    `http://193.168.195.191/api/countkomplain/${formattedDate}`
                 );
                 setKodeDataHariIni(response.data.count);
             } catch (error) {
@@ -26,7 +26,7 @@ const DashboardAdminCSO = ({ user }) => {
                 const year = today.getFullYear();
                 const month = today.getMonth() + 1;
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/countkomplain/${year}/${month}`
+                    `http://193.168.195.191/api/countkomplain/${year}/${month}`
                 );
                 setKodeDataBulanIni(response.data.count);
             } catch (error) {

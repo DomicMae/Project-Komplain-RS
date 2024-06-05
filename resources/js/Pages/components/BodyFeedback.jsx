@@ -40,7 +40,7 @@ const BodyFeedback = ({ title, description }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/makeNewFeedback",
+                "http://193.168.195.191/api/makeNewFeedback",
                 formData
             );
             console.log(response.data);

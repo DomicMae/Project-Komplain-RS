@@ -52,7 +52,7 @@ const DataDaftarKomplain = ({ user }) => {
 
         if (Math.abs(komplainDate.getTime() - now.getTime()) < 1000) {
             axios
-                .get("http://127.0.0.1:8000/api/sendemailforCSO")
+                .get("http://193.168.195.191/api/sendemailforCSO")
                 .then((response) => {
                     console.log(response.data); // Periksa respons dari API
                 })
@@ -82,7 +82,7 @@ const DataDaftarKomplain = ({ user }) => {
     const handleTrashClick = async (id) => {
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/hapuskomplain",
+                "http://193.168.195.191/api/hapuskomplain",
                 { id }
             );
             console.log(response.data);
@@ -97,7 +97,7 @@ const DataDaftarKomplain = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/dataKomplain`
+                    `http://193.168.195.191/api/dataKomplain`
                 );
                 let sortedKomplain = response.data;
 

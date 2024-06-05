@@ -144,7 +144,7 @@ const InputDataKomplain = ({ title, description }) => {
         formDataToSend.append("gambar", formData.gambar);
 
         axios
-            .post(`${process.env.APP_HOST}/api/addkomplain`, formDataToSend)
+            .post("http://193.168.195.191/api/addkomplain", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 setApiResponse(response.data);
@@ -163,7 +163,7 @@ const InputDataKomplain = ({ title, description }) => {
 
     const sendEmail = () => {
         axios
-            .get(`${process.env.APP_HOST}/api/sendemail`)
+            .get("http://193.168.195.191/api/sendemail")
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -184,7 +184,7 @@ const InputDataKomplain = ({ title, description }) => {
 
         const tanggalUpdate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         axios
-            .post(`${process.env.APP_HOST}/api/addLiveTracking`, {
+            .post("http://193.168.195.191/api/addLiveTracking", {
                 tanggal_update: tanggalUpdate,
             })
             .then((response) => {

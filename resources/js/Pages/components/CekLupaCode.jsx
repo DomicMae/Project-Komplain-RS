@@ -33,7 +33,7 @@ const CekLupaCode = ({ title, description }) => {
             : no_telp;
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/livetrackingByTelp/${modifiedNoTelp}`
+                `http://193.168.195.191/api/livetrackingByTelp/${modifiedNoTelp}`
                 // `http://localhost/laract10/public/api/livetracking/${liveTrackingCode}`
             );
             const data = response.data;

@@ -24,7 +24,7 @@ const IsiKomplainCustomer = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editUnit", formDataToSend)
+            .post("http://193.168.195.191/api/editUnit", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -43,7 +43,7 @@ const IsiKomplainCustomer = ({ user }) => {
             const fetchData = async () => {
                 try {
                     const response = await axios.get(
-                        `http://127.0.0.1:8000/api/dataKomplainById/${id}`
+                        `http://193.168.195.191/api/dataKomplainById/${id}`
                     );
                     setKomplainDetail(response.data);
                 } catch (error) {
