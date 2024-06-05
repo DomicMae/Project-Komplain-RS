@@ -163,7 +163,7 @@ const InputDataKomplain = ({ title, description }) => {
 
     const sendEmail = () => {
         axios
-            .get("http://127.0.0.1:8000/api/sendemail")
+            .get(`${process.env.APP_HOST}/api/sendemail`)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);
@@ -184,7 +184,7 @@ const InputDataKomplain = ({ title, description }) => {
 
         const tanggalUpdate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         axios
-            .post("http://127.0.0.1:8000/api/addLiveTracking", {
+            .post(`${process.env.APP_HOST}/api/addLiveTracking`, {
                 tanggal_update: tanggalUpdate,
             })
             .then((response) => {
