@@ -11,27 +11,6 @@ use TCPDF;
 
 class KomplainController extends Controller
 {
-        public function tampilkomplain()
-    {
-        return view('tampilkomplain');
-    }
-
-    public function tambahkomplain()
-    {
-        return view('tambahkomplain');
-    }
-
-    public function simpankomplain(Request $request)
-    {
-        $komplain = Komplain::create([
-            'nama_customer' => $request->nama_customer,
-            'no_tlp_customer' => $request->no_tlp_customer,
-        ]);
-
-        return redirect()->route('tampilkomplain');
-    }
-
-
     
     /**
      * Display a listing of the resource.
