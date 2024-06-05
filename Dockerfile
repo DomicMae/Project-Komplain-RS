@@ -45,4 +45,4 @@ COPY .env .env
 EXPOSE 80
 
 # Start the Apache server and serve the Laravel application
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
