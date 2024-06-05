@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  grweb:
+    image: web-gr-complaint:latest
+    container_name: gr-complaint-container
+    restart: always
+    volumes:
+      - ./data/public/uploads:/var/www/html/public/uploads
+    ports:
+      - "80:80"
