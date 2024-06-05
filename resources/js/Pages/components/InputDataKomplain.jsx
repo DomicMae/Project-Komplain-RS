@@ -144,7 +144,7 @@ const InputDataKomplain = ({ title, description }) => {
         formDataToSend.append("gambar", formData.gambar);
 
         axios
-            .post("http://127.0.0.1:8000/api/addkomplain", formDataToSend)
+            .post(`${process.env.APP_HOST}/api/addkomplain`, formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 setApiResponse(response.data);
