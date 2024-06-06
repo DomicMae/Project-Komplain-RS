@@ -1,5 +1,5 @@
 import BodyAboutKomplain from "@/Pages/components/BodyAboutKomplain";
-import NavbarCustomer from "@/Components/NavbarCustomer";
+import NavbarCustomer from "@/Pages/components/NavbarCustomer";
 import { Head } from "@inertiajs/react";
 
 export default function Tes(props) {

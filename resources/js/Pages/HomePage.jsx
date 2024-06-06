@@ -1,5 +1,5 @@
 import BodyHomePage from "@/Components/BodyHomePage";
-import NavbarCustomer from "@/Components/NavbarCustomer";
+import NavbarCustomer from "@/Pages/components/NavbarCustomer";
 import { Head } from "@inertiajs/react";
 
 export default function HomePage(props) {

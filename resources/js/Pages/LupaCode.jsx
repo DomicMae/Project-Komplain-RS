@@ -1,7 +1,6 @@
-import NavbarCustomer from "@/Components/NavbarCustomer";
+import NavbarCustomer from "@/Pages/components/NavbarCustomer";
 import { Head } from "@inertiajs/react";
 import CekLupaCode from "./components/CekLupaCode";
-
 
 export default function LupaCode(props) {
     return (

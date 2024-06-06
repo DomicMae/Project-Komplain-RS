@@ -1,4 +1,4 @@
-import NavbarCustomer from "@/Components/NavbarCustomer";
+import NavbarCustomer from "@/Pages/components/NavbarCustomer";
 import { Head } from "@inertiajs/react";
 import CekCodePage from "./components/CekCodePage";
 

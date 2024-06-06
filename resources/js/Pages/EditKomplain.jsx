@@ -1,4 +1,4 @@
-import Navbar from "@/Components/NavbarCustomer";
+import Navbar from "@/Pages/components/NavbarCustomer";
 import { Inertia } from "@inertiajs/inertia";
 import { Head } from "@inertiajs/react";
 import { useState } from "react";

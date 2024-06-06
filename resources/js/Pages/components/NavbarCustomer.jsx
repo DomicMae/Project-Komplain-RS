@@ -15,13 +15,15 @@ const NavbarCustomer = () => {
                     src="/images/Logo_Background.png"
                     alt="image description"
                 />
-                <Link
-                    href={route("home")}
-                    className="btn btn-ghost text-xl text-green-500"
-                    as="button"
-                >
-                    RS GOTONG<span className="text-black">ROYONG</span>
-                </Link>
+                {isMobileMenuOpen && (
+                    <Link
+                        href={route("home")}
+                        className="btn btn-ghost text-xl text-green-500"
+                        as="button"
+                    >
+                        RS GOTONG<span className="text-black">ROYONG</span>
+                    </Link>
+                )}
             </div>
             <div className="flex-none text-black relative">
                 <button
