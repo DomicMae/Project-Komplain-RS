@@ -157,14 +157,27 @@ const CekCodePage = ({ title, description }) => {
                 console.error(error);
             });
     };
-    const handleCopyToClipboard = () => {
-        if (apiResponse && apiResponse.kode) {
+    const handleCopyToClipboard = (kode) => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard
-                .writeText(apiResponse.kode)
-                .then(() => alert("Data copied to clipboard!"))
+                .writeText(kode)
+                .then(() => alert("Kode berhasil disalin ke clipboard!"))
                 .catch((error) =>
-                    console.error("Failed to copy data: ", error)
+                    console.error("Gagal menyalin kode ke clipboard: ", error)
                 );
+        } else {
+            // Fallback untuk browser yang tidak mendukung Clipboard API
+            const textArea = document.createElement("textarea");
+            textArea.value = kode;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand("copy");
+                alert("Kode berhasil disalin ke clipboard!");
+            } catch (error) {
+                console.error("Gagal menyalin kode ke clipboard: ", error);
+            }
+            document.body.removeChild(textArea);
         }
     };
 
