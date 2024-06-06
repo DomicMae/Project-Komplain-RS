@@ -77,17 +77,11 @@ const CekCodePage = ({ title, description }) => {
         e.preventDefault();
 
         try {
-            const response = await axios.get(
-                `http://193.168.195.191/api/livetracking/${liveTrackingCode}`
-            );
-
-            setKodeData(response.data.kode);
-
             // Cek apakah ada laporan dalam respons data.kode
-            if (response.data.kode.laporan) {
+            if (kodeData.laporan) {
                 // Konstruksi URL lengkap ke file laporan
                 const baseUrl = "http://193.168.195.191/uploads"; // Ubah sesuai dengan URL server Anda
-                const laporanUrl = `${baseUrl}/${response.data.kode.laporan}`;
+                const laporanUrl = `${baseUrl}/${kodeData.laporan}`;
 
                 // Buka laporan PDF di Google Chrome
                 window.open(laporanUrl, "_blank");
