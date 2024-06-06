@@ -8,6 +8,24 @@ const InputDataKomplain = ({ title, description }) => {
     const [showModal, setShowModal] = useState(false);
     const [showKonfirmasiData, setKonfirmasiData] = useState(false);
     const [apiResponse, setApiResponse] = useState(null);
+    const [isDragOver, setIsDragOver] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+        const file = e.dataTransfer.files[0];
+        handleFileChange(file);
+    };
     const [formData, setFormData] = useState({
         jenis_pasien: "",
         judul: "",
@@ -91,6 +109,7 @@ const InputDataKomplain = ({ title, description }) => {
         }
 
         // Set formData langsung dengan file gambar
+        setSelectedImage(URL.createObjectURL(file)); // Menampilkan gambar yang dipilih
         setFormData({
             ...formData,
             gambar: file,
@@ -587,34 +606,93 @@ const InputDataKomplain = ({ title, description }) => {
                                     >
                                         Bukti foto
                                     </label>
-                                    <div className="mt-2 mb-4 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 bg-white">
+                                    <div
+                                        className={`mt-2 mb-4 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${
+                                            isDragOver
+                                                ? "bg-gray-200"
+                                                : "bg-white"
+                                        }`}
+                                        onDragOver={handleDragOver}
+                                        onDragLeave={handleDragLeave}
+                                        onDrop={handleDrop}
+                                    >
                                         <div className="text-center">
-                                            <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                                                <label
-                                                    htmlFor="gambar"
-                                                    className="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 mt-3 flex items-center justify-end"
-                                                >
-                                                    <input
-                                                        id="gambar"
-                                                        name="gambar"
-                                                        type="file"
-                                                        accept=".png, .jpg, .jpeg" // Hanya menerima file dengan ekstensi tertentu
-                                                        className="appearance-none"
-                                                        onChange={(e) =>
-                                                            handleFileChange(
-                                                                e.target
-                                                                    .files[0]
-                                                            )
-                                                        } // Tangkap nilai file dan panggil fungsi handleFileChange
+                                            {selectedImage ? (
+                                                <div className="relative">
+                                                    <img
+                                                        src={selectedImage}
+                                                        alt="Selected"
+                                                        className="w-64 h-64 object-cover rounded-lg border border-gray-900"
                                                     />
-                                                </label>
-                                            </div>
-                                            <p className="text-black">
-                                                Upload a file or drag and drop
-                                            </p>
-                                            <p className="text-xs leading-5 text-gray-600">
-                                                PNG, JPG, JPEG up to 10MB
-                                            </p>
+                                                    <button
+                                                        onClick={() =>
+                                                            setSelectedImage(
+                                                                null
+                                                            )
+                                                        }
+                                                        className="absolute top-0 right-0 mt-2 mr-2 bg-white text-gray-800 rounded-full p-1 hover:bg-gray-200 focus:outline-none"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className="h-6 w-6"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="2"
+                                                                d="M6 18L18 6M6 6l12 12"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div className="mt-4 flex flex-col items-center text-sm leading-6 text-gray-600">
+                                                    <label
+                                                        htmlFor="gambar"
+                                                        className="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 mt-3 flex flex-col items-center justify-center w-full"
+                                                    >
+                                                        <svg
+                                                            className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 20 16"
+                                                        >
+                                                            <path
+                                                                stroke="currentColor"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="2"
+                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                            />
+                                                        </svg>
+                                                        <p className="text-black">
+                                                            Upload a file or
+                                                            drag and drop
+                                                        </p>
+                                                        <p className="text-xs leading-5 text-gray-600">
+                                                            PNG, JPG, JPEG up to
+                                                            10MB
+                                                        </p>
+                                                        <input
+                                                            id="gambar"
+                                                            name="gambar"
+                                                            type="file"
+                                                            accept=".png, .jpg, .jpeg"
+                                                            className="appearance-none hidden"
+                                                            onChange={(e) =>
+                                                                handleFileChange(
+                                                                    e.target
+                                                                        .files[0]
+                                                                )
+                                                            }
+                                                        />
+                                                    </label>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

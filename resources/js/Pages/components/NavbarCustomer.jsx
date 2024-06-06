@@ -15,7 +15,7 @@ const NavbarCustomer = () => {
                     src="/images/Logo_Background.png"
                     alt="image description"
                 />
-                {isMobileMenuOpen && (
+                {!isMobileMenuOpen && (
                     <Link
                         href={route("home")}
                         className="btn btn-ghost text-xl text-green-500"

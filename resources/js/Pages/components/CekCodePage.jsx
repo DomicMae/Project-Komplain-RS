@@ -245,36 +245,43 @@ const CekCodePage = ({ title, description }) => {
                     )}
                 </div>
 
-                <div className="text-container  text-center">
-                    <h2 className="text-4xl font-bold text-gray-900">
-                        Detail Status Komplain
-                    </h2>
-                </div>
-                <div className="status-container mt-4 p-4 border border-gray-300 rounded-md shadow-sm bg-white">
-                    {/* Untuk membuat garis */}
-                    <ol className="mx-4 relative border-s-4 border-gray-200 dark:border-green-500">
-                        {liveTracking && (
-                            <div>
-                                {liveTracking.map((status, index) => (
-                                    <li key={index} className="mb-2 ms-6">
-                                        <span className="absolute flex items-center justify-center w-10 h-10 rounded-full left-0 transform -translate-x-1/2 bg-[#1BBD36]">
-                                            <Mail
-                                                size={15}
-                                                className="text-black"
-                                            />
-                                        </span>
-                                        <h3 className="px-3 flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-black">
-                                            {status.nama_status}
-                                        </h3>
-                                        <time className="px-3 py-2 flex mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                            {status.tanggal_update}
-                                        </time>
-                                    </li>
-                                ))}
-                            </div>
-                        )}
-                    </ol>
-                </div>
+                {kodeData && (
+                    <>
+                        <div className="text-container  text-center">
+                            <h2 className="text-4xl font-bold text-gray-900">
+                                Detail Status Komplain
+                            </h2>
+                        </div>
+                        <div className="status-container mt-4 p-4 border border-gray-300 rounded-md shadow-sm bg-white">
+                            {/* Untuk membuat garis */}
+                            <ol className="mx-4 relative border-s-4 border-gray-200 dark:border-green-500">
+                                {liveTracking && (
+                                    <div>
+                                        {liveTracking.map((status, index) => (
+                                            <li
+                                                key={index}
+                                                className="mb-2 ms-6"
+                                            >
+                                                <span className="absolute flex items-center justify-center w-10 h-10 rounded-full left-0 transform -translate-x-1/2 bg-[#1BBD36]">
+                                                    <Mail
+                                                        size={15}
+                                                        className="text-black"
+                                                    />
+                                                </span>
+                                                <h3 className="px-3 flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-black">
+                                                    {status.nama_status}
+                                                </h3>
+                                                <time className="px-3 py-2 flex mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                                    {status.tanggal_update}
+                                                </time>
+                                            </li>
+                                        ))}
+                                    </div>
+                                )}
+                            </ol>
+                        </div>
+                    </>
+                )}
                 {kodeData && kodeData.id_status === 5 && (
                     <>
                         <div className="flex justify-center items-center py-5 gap-x-6">

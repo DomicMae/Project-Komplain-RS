@@ -70,56 +70,54 @@ const IsiKomplainCustomer = ({ user }) => {
     return (
         <div>
             {komplainDetail ? (
-                <div className="px-10 py-5 mb-6">
-                    <h1 className="px-16 text-2xl text-gray-800 font-bold pb-2 mb-4 border-b-2">
+                <div className="px-4 md:px-10 py-5 mb-6">
+                    <h1 className="px-4 md:px-16 text-2xl text-gray-800 font-bold pb-2 mb-4 border-b-2">
                         {komplainDetail.judul}
                     </h1>
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <img
-                                    src="/images/Icon_Unknown.png"
-                                    className="rounded-full w-12 h-12 border border-gray-900"
-                                />
-                                <div className="px-3 flex flex-col ml-2">
-                                    <span className="py-1 text-xl text-black font-bold">
-                                        {komplainDetail.nama}
-                                    </span>
-                                    <div className="flex items-center">
-                                        <div className="border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2">
-                                            {komplainDetail.unit}
-                                        </div>
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+                        <div className="flex items-start md:items-center mb-4 md:mb-0">
+                            <img
+                                src="/images/Icon_Unknown.png"
+                                className="rounded-full w-12 h-12 border border-gray-900"
+                            />
+                            <div className="px-3 flex flex-col ml-2">
+                                <span className="py-1 text-xl text-black font-bold">
+                                    {komplainDetail.nama}
+                                </span>
+                                <div className="flex items-center mt-2 md:mt-0">
+                                    <div className="border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2">
+                                        {komplainDetail.unit}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <span className="text-sm text-gray-900">
-                            tanggal {tanggal} {bulan} {tahun}
+                        <span className="text-sm text-gray-900 mt-2 md:mt-0">
+                            Tanggal {tanggal} {bulan} {tahun}
                         </span>
                     </div>
-                    <div className="py-6 pl-2 text-black">
-                        <p className="px-16">{komplainDetail.kronologi}</p>
-                        <p className="mt-4 px-16">Regards,</p>
-                        <p className="px-16">{komplainDetail.nama}</p>
+                    <div className="py-6 text-black">
+                        <p className="px-4 md:px-16">
+                            {komplainDetail.kronologi}
+                        </p>
+                        <p className="mt-4 px-4 md:px-16">Regards,</p>
+                        <p className="px-4 md:px-16">{komplainDetail.nama}</p>
                     </div>
                     {komplainDetail.gambar !== "Tidak ada gambar" &&
                         komplainDetail.gambar && (
-                            <div className="px-16 flex items-center">
+                            <div className="px-4 md:px-16 flex items-center">
                                 {/* Tampilkan gambar hanya jika ada */}
                                 <img
                                     src={`/uploads/${komplainDetail.gambar}`}
-                                    className="w-48 h-48 border border-gray-900"
+                                    className="w-32 h-32 md:w-48 md:h-48 border border-gray-900"
                                 />
                             </div>
                         )}
                     {komplainDetail.gambar === "Tidak ada gambar" && (
-                        <div className="px-16 flex items-center">
-                            <p className="px-2 text-black">
-                                "Tidak ada gambar"
-                            </p>
+                        <div className="px-4 md:px-16 flex items-center">
+                            <p className="px-2 text-black">Tidak ada gambar</p>
                         </div>
                     )}
-                    <div className="flex justify-end px-16 py-6 text-black">
+                    <div className="flex justify-end px-4 md:px-16 py-6 text-black">
                         <div className="border border-black rounded-md inline-block p-5">
                             <p className="text-right">Penerima</p>
                             <p className="text-right">
