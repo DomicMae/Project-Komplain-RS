@@ -9,7 +9,7 @@ const CekLupaCode = ({ title, description }) => {
     const [isCekRiwayatClicked, setIsCekRiwayatClicked] = useState(false); // State untuk menandai apakah tombol "CEK RIWAYAT" sudah ditekan atau belum
 
     const handleCopyToClipboard = (kode) => {
-        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard
                 .writeText(kode)
                 .then(() => alert("Kode berhasil disalin ke clipboard!"))
@@ -17,7 +17,18 @@ const CekLupaCode = ({ title, description }) => {
                     console.error("Gagal menyalin kode ke clipboard: ", error)
                 );
         } else {
-            alert("Clipboard API tidak didukung di browser ini.");
+            // Fallback untuk browser yang tidak mendukung Clipboard API
+            const textArea = document.createElement("textarea");
+            textArea.value = kode;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand("copy");
+                alert("Kode berhasil disalin ke clipboard!");
+            } catch (error) {
+                console.error("Gagal menyalin kode ke clipboard: ", error);
+            }
+            document.body.removeChild(textArea);
         }
     };
 
