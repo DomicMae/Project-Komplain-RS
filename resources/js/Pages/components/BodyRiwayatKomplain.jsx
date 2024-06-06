@@ -63,7 +63,7 @@ const BodyRiwayatKomplain = ({ user }) => {
                     >
                         Masukkan Nomor Telepon
                     </label>
-                    <div className="mt-2">
+                    <div className="mt-2 mx-auto" style={{ maxWidth: "20rem" }}>
                         <input
                             type="text"
                             name="no-telp"
@@ -148,13 +148,13 @@ const BodyRiwayatKomplain = ({ user }) => {
                                         </p>
                                     </div>
                                     {/* Grid 02: judul */}
-                                    <div className="col-span-1 md:col-span-2 flex items-center justify-start">
+                                    <div className="col-span-1 md:col-span-2 flex items-center justify-start md:justify-center">
                                         <p className="text-sm font-semibold mb-2 text-center text-black">
                                             {komplain.judul}
                                         </p>
                                     </div>
                                     {/* Grid 03: kronologi */}
-                                    <div className="col-span-1 md:col-span-2 flex items-start justify-start">
+                                    <div className="col-span-1 md:col-span-2 flex items-start justify-start md:justify-center">
                                         <p className="text-sm font-semibold mb-2 text-justify text-black">
                                             {komplain.kronologi}
                                         </p>

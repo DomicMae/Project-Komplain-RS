@@ -228,15 +228,15 @@ const InputDataKomplain = ({ title, description }) => {
     };
 
     return (
-        <form className="py-12 flex justify-center">
+        <form className="py-6 sm:py-12 flex justify-center">
             <div className="max-w-3xl w-full">
-                <div className="space-y-12">
-                    <div className="border-b border-gray-900/10 pb-12">
+                <div className="space-y-6 sm:space-y-12">
+                    <div className="border-b border-gray-900/10 pb-6 sm:pb-12">
                         <div className="text-container text-center">
-                            <h2 className="text-4xl font-bold text-gray-900">
+                            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">
                                 Welcome Komplain Layanan
                             </h2>
-                            <h2 className="text-4xl font-bold text-gray-900">
+                            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">
                                 Rumah Sakit Gotong Royong
                             </h2>
                         </div>
@@ -246,20 +246,27 @@ const InputDataKomplain = ({ title, description }) => {
                 <div>
                     <div>
                         <div className="card border-secondary">
-                            <div className="text-2xl rounded-lg card-header text-white text-center bg-[#1BBD36] py-2">
+                            <div className="text-lg sm:text-2xl rounded-lg card-header text-white text-center bg-[#1BBD36] py-2 sm:py-4">
                                 Sampaikan Laporan Anda
                             </div>
                             <div className="card-body">
-                                <div className="mt-3 flex items-center justify-end pb-5">
-                                    <p className="text-xl text-center text-gray-900">
-                                        Perhatikan cara menyampaikan pengaduan
-                                        yang baik dan benar
-                                    </p>
-                                    <Link href={route("about")} as="button">
-                                        <button className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                            ?
-                                        </button>
-                                    </Link>
+                                <div className="mt-2 sm:mt-3 flex flex-col sm:flex-row items-center justify-between pb-2 sm:pb-5">
+                                    <div className="flex items-center">
+                                        <p className="text-sm sm:text-xl text-center sm:text-left text-gray-900">
+                                            Perhatikan cara menyampaikan
+                                            pengaduan yang baik dan benar
+                                        </p>
+                                        <span className="ml-2 sm:ml-3">
+                                            <Link
+                                                href={route("about")}
+                                                as="button"
+                                            >
+                                                <button className="rounded-md bg-green-500 px-3 py-2 text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                    ?
+                                                </button>
+                                            </Link>
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div className="grid sm:grid-cols-2 gap-4">
