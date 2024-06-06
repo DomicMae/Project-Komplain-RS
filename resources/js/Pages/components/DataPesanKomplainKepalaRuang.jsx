@@ -88,7 +88,7 @@ const DataPesanKomplainKepalaRuang = ({ user }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/reply",
+                "http://193.168.195.191/api/reply",
                 formData,
                 {
                     headers: {
@@ -121,7 +121,7 @@ const DataPesanKomplainKepalaRuang = ({ user }) => {
         };
 
         axios
-            .post("http://127.0.0.1:8000/api/editStatus", formDataToSend)
+            .post("http://193.168.195.191/api/editStatus", formDataToSend)
             .then((response) => {
                 // Handle response jika berhasil
                 console.log(response.data);

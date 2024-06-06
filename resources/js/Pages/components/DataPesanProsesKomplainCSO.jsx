@@ -22,12 +22,12 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/dataKomplainKepalaBidang/${id}`
+                    `http://193.168.195.191/api/dataKomplainKepalaBidang/${id}`
                 );
                 setKomplainDetail(response.data);
 
                 const levelResponse = await axios.get(
-                    `http://127.0.0.1:8000/api/countdown_level/${response.data.namaLevel}`
+                    `http://193.168.195.191/api/countdown_level/${response.data.namaLevel}`
                 );
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -55,7 +55,7 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/editKeterangan",
+                "http://193.168.195.191/api/editKeterangan",
                 formData,
                 {
                     headers: {
@@ -108,7 +108,7 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/reply",
+                "http://193.168.195.191/api/reply",
                 formData,
                 {
                     headers: {
@@ -136,7 +136,7 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
             // Cek apakah ada laporan dalam respons data.kode
             if (komplainDetail.laporan) {
                 // Konstruksi URL lengkap ke file laporan
-                const baseUrl = "http://127.0.0.1:8000/uploads"; // Ubah sesuai dengan URL server Anda
+                const baseUrl = "http://193.168.195.191/uploads"; // Ubah sesuai dengan URL server Anda
                 const laporanUrl = `${baseUrl}/${komplainDetail.laporan}`;
 
                 // Buka laporan PDF di Google Chrome
