@@ -295,13 +295,17 @@ const CekCodePage = ({ title, description }) => {
                                 Cek Laporan Komplain
                             </button>
                         </div>
+                        <p className="text-center">
+                            Bagaimana tanggapan anda mengenai hasil laporan
+                            kami?{" "}
+                        </p>
                         <div className="flex justify-center items-center py-5 gap-x-6">
                             <button
                                 type="submit"
                                 onClick={handleShowReplyForm}
                                 className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Tidak Puas ?
+                                Tidak Puas
                             </button>
                             <button
                                 type="button"
