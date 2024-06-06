@@ -61,6 +61,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         const nama = komplainDetail.nama;
         const judul = komplainDetail.judul;
         const kronologi = komplainDetail.kronologi;
+        const keterangan = "menunggu konfirmasi";
         // Mengambil gambar dari input file (contoh: gambarInput)
         const gambarInput = document.querySelector('input[name="gambar"]');
         const gambarFile = gambarInput ? gambarInput.files[0] : null;
@@ -74,6 +75,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         formData.append("nama", nama);
         formData.append("judul", judul);
         formData.append("kronologi", kronologi);
+        formData.append("keterangan", keterangan);
         if (gambarFile) {
             formData.append("gambar", gambarFile);
         }
@@ -103,13 +105,11 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         const id = urlParams.get("id");
         // Mengambil ID komplain dari formulir atau sumber lainnya
         const komplainId = id; // Pastikan formData.id tersedia
-        const statusId = 4;
-        const keterangan = "selesai";
+        const statusId = 3;
 
         const formDataToSend = {
             id: komplainId, // Mengirim ID komplain yang ingin diubah
             id_status: statusId, // Mengirim nilai baru untuk kolom idStatus
-            keterangan: keterangan, //Mengirim value selesai
         };
 
         axios
@@ -471,7 +471,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
                         </div>
                     )}
                     {!showSelesai &&
-                        komplainDetail.keterangan === "selesai" && (
+                        komplainDetail.keterangan === "menunggu laporan" && (
                             <div>
                                 <form
                                     className="py-5 pr-3 mt-4 flex items-start"

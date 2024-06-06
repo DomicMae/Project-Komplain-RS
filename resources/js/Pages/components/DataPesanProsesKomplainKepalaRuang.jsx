@@ -61,6 +61,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
         const nama = komplainDetail.nama;
         const judul = komplainDetail.judul;
         const kronologi = komplainDetail.kronologi;
+        const keterangan = "menunggu konfirmasi";
         // Mengambil gambar dari input file (contoh: gambarInput)
         const gambarInput = document.querySelector('input[name="gambar"]');
         const gambarFile = gambarInput ? gambarInput.files[0] : null;
@@ -74,6 +75,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
         formData.append("nama", nama);
         formData.append("judul", judul);
         formData.append("kronologi", kronologi);
+        formData.append("keterangan", keterangan);
         if (gambarFile) {
             formData.append("gambar", gambarFile);
         }
@@ -104,7 +106,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
         // Mengambil ID komplain dari formulir atau sumber lainnya
         const komplainId = id; // Pastikan formData.id tersedia
         const statusId = 4;
-        const keterangan = "selesai";
+        const keterangan = "menunggu laporan";
 
         const formDataToSend = {
             id: komplainId, // Mengirim ID komplain yang ingin diubah
@@ -471,7 +473,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
                         </div>
                     )}
                     {!showSelesai &&
-                        komplainDetail.keterangan === "selesai" && (
+                        komplainDetail.keterangan === "menunggu laporan" && (
                             <div>
                                 <form
                                     className="py-5 pr-3 mt-4 flex items-start"
