@@ -7,6 +7,7 @@ const BodyRiwayatKomplain = ({ user }) => {
     const [no_telp, setRiwayatKomplain] = useState("");
     const [selectedKomplain, setSelectedKomplain] = useState(null);
     const [isCekRiwayatClicked, setIsCekRiwayatClicked] = useState(false); // State untuk menandai apakah tombol "CEK RIWAYAT" sudah ditekan atau belum
+    const isMobile = window.innerWidth <= 600; // Misalnya, jika lebar layar kurang dari atau sama dengan 600px
 
     const handleRiwayatKomplain = (e) => {
         setRiwayatKomplain(e.target.value);
@@ -95,25 +96,63 @@ const BodyRiwayatKomplain = ({ user }) => {
                     <div className="bg-gray-900 rounded-lg p-4 grid grid-cols-1 md:grid-cols-7 gap-4">
                         {/* Grid 01: Nama */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-start">
-                            <p className="text-left text-white">Nama</p>
+                            <p
+                                className={`text-left text-white ${
+                                    isMobile
+                                        ? "justify-start"
+                                        : "md:justify-center"
+                                }`}
+                            >
+                                Nama
+                            </p>
                         </div>
                         {/* Grid 02: Judul */}
                         <div className="col-span-1 md:col-span-2 flex items-center justify-start">
-                            <p className="text-left text-white">Judul</p>
+                            <p
+                                className={`text-left text-white ${
+                                    isMobile
+                                        ? "justify-start"
+                                        : "md:justify-center"
+                                }`}
+                            >
+                                Judul
+                            </p>
                         </div>
                         {/* Grid 03: Kronologi */}
-                        <div className="col-span-1 md:col-span-2 flex items-center justify-start md:justify-center">
-                            <p className="text-left md:text-center text-white">
+                        <div className="col-span-1 md:col-span-2 flex items-center justify-start">
+                            <p
+                                className={`text-left md:text-center text-white ${
+                                    isMobile
+                                        ? "justify-start"
+                                        : "md:justify-center"
+                                }`}
+                            >
                                 Kronologi
                             </p>
                         </div>
                         {/* Grid 04: Unit */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-center">
-                            <p className="text-center text-white">Unit</p>
+                            <p
+                                className={`text-center text-white ${
+                                    isMobile
+                                        ? "justify-start"
+                                        : "md:justify-center"
+                                }`}
+                            >
+                                Unit
+                            </p>
                         </div>
                         {/* Grid 05: Tanggal */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-center">
-                            <p className="text-center text-white">Tanggal</p>
+                            <p
+                                className={`text-center text-white ${
+                                    isMobile
+                                        ? "justify-start"
+                                        : "md:justify-center"
+                                }`}
+                            >
+                                Tanggal
+                            </p>
                         </div>
                     </div>
                 </div>
