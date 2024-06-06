@@ -22,6 +22,8 @@ COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
 # Copy the Laravel application files to the working directory
 COPY . .
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Run Composer Update
 RUN composer update
 
