@@ -20,6 +20,11 @@ const navLink = [
         route: "daftarKomplain",
     },
     {
+        name: "Proses Komplain",
+        icon: RefreshCcw,
+        route: "prosesKomplainCSO",
+    },
+    {
         name: "Riwayat Komplain",
         icon: History,
         route: "riwayatKomplainCSO",

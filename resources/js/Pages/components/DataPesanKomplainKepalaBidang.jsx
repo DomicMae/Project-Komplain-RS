@@ -27,35 +27,6 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
         setSelectedPenerima(e.target.value);
     };
 
-    const handleSubmitSelect = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("id");
-
-        try {
-            const response = await axios.post(
-                "http://193.168.195.191/api/editPenerima",
-                {
-                    id: id,
-                    penerima: selectedPenerima,
-                }
-            );
-            console.log("Penerima updated successfully:", response.data);
-            setShowSelesai(true);
-        } catch (error) {
-            console.error("There was an error updating penerima!", error);
-            if (error.response) {
-                console.error("Data:", error.response.data);
-                console.error("Status:", error.response.status);
-                console.error("Headers:", error.response.headers);
-            } else if (error.request) {
-                console.error("Request:", error.request);
-            } else {
-                console.error("Error message:", error.message);
-            }
-        }
-    };
-
     const handleSubmit = (e) => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
@@ -81,6 +52,59 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                 // Handle error jika terjadi kesalahan
                 console.error(error);
             });
+    };
+    const handleSubmitReply = async (e) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+
+        e.preventDefault(); // Mencegah perilaku default dari event klik
+
+        // Mengambil ID komplain dari formulir atau sumber lainnya
+        const komplainId = id; // Pastikan formData.id tersedia
+        const statusId = 5;
+        const penerima = komplainDetail.penerima;
+        const jenis_pasien = komplainDetail.jenis_pasien;
+        const nama = komplainDetail.nama;
+        const judul = komplainDetail.judul;
+        const kronologi = komplainDetail.kronologi;
+        const keterangan = "menunggu konfirmasi";
+        // Mengambil gambar dari input file (contoh: gambarInput)
+        const gambarInput = document.querySelector('input[name="gambar"]');
+        const gambarFile = gambarInput ? gambarInput.files[0] : null;
+
+        const formData = new FormData();
+        formData.append("id", komplainId);
+        formData.append("penerima", penerima);
+        formData.append("laporan", reply);
+        formData.append("id_status", statusId);
+        formData.append("jenis_pasien", jenis_pasien);
+        formData.append("nama", nama);
+        formData.append("judul", judul);
+        formData.append("kronologi", kronologi);
+        formData.append("keterangan", keterangan);
+        if (gambarFile) {
+            formData.append("gambar", gambarFile);
+        }
+
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/reply",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+
+            // Handle response jika berhasil
+            console.log(response.data);
+            sendLiveTracking();
+            setShowSelesai(true);
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
     const editStatus = () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -399,7 +423,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                 {/* Tampilkan gambar hanya jika ada */}
                                 <img
                                     src={`/uploads/${komplainDetail.gambar}`}
-                                    className="h-48 border border-gray-900"
+                                    className="w-48 h-48 border border-gray-900"
                                 />
                             </div>
                         )}
@@ -410,39 +434,30 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                             </p>
                         </div>
                     )}
-                    {!showSelesai && (
+                    <div className="px-16">
+                        <div className="flex text-black border-gray-300">
+                            <div className="border border-black p-4 ">
+                                {/* Menampilkan waktu tersisa jika showReplyForm true */}
+                                <p className="text-center">
+                                    Waktu tersisa untuk membalas :
+                                </p>
+                                <p className="text-center">{timeRemaining}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {!showSelesai && komplainDetail.keterangan === null && (
                         <div className="px-16 mt-8 flex items-center space-x-4">
                             <button
                                 className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
-                                style={{ width: "150px", height: "40px" }}
+                                style={{
+                                    width: "200px",
+                                    height: "40px",
+                                }} //Ukuran kotak icon
                                 onClick={handleShowReplyForm}
                             >
-                                <ClipboardCheck />
-                                <span>Terima</span>
+                                <Check />
+                                <span>Selesaikan Komplain</span>
                             </button>
-                            <button
-                                className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
-                                style={{ width: "150px", height: "40px" }}
-                                onClick={handleShowLevelOptionsClick}
-                            >
-                                <FolderInput />
-                                <span>Pindah</span>
-                            </button>
-                        </div>
-                    )}
-                    {showReplyForm && !showLevelOptions && (
-                        <div className="px-16">
-                            <div className="flex text-black border-gray-300">
-                                <div className="border border-black p-4 ">
-                                    {/* Menampilkan waktu tersisa jika showReplyForm true */}
-                                    <p className="text-center">
-                                        Waktu tersisa untuk membalas :
-                                    </p>
-                                    <p className="text-center">
-                                        {timeRemaining}
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     )}
                     {showSelesai && !showLevelOptions && showReplyForm && (
@@ -452,7 +467,67 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                 className="px-3 rounded-md bg-green-500 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() => {
                                     window.location.href = route(
-                                        "daftarKomplainKepalaBidang"
+                                        "prosesKomplainKepalaBidang"
+                                    );
+                                }}
+                            >
+                                Kembali ke daftar
+                            </button>
+                        </div>
+                    )}
+                    {!showSelesai &&
+                        komplainDetail.keterangan === "menunggu laporan" && (
+                            <div>
+                                <form
+                                    className="py-5 pr-3 mt-4 flex items-start"
+                                    onSubmit={handleSubmitReply}
+                                >
+                                    <div className="flex items-start w-full">
+                                        <img
+                                            src="/images/Avatar_Admin.png"
+                                            className="rounded-full w-12 h-12 border border-gray-900 mr-4"
+                                        />
+                                        <textarea
+                                            className="flex-1 border border-gray-300 rounded-md resize-none px-3 py-2 focus:outline-none focus:border-indigo-500 text-black"
+                                            rows="4"
+                                            placeholder="Type your reply here..."
+                                            value={reply}
+                                            onChange={(e) =>
+                                                setReply(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </div>
+                                </form>
+                                <div className="px-16">
+                                    {komplainDetail.unit ===
+                                        "Unit Pemeliharaan Sarana" && (
+                                        <input
+                                            type="file"
+                                            name="gambar"
+                                            accept="image/*"
+                                            className="mt-2"
+                                        />
+                                    )}
+                                </div>
+                                <div className="px-3 flex justify-end">
+                                    <button
+                                        type="submit"
+                                        className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        onClick={handleSubmitReply}
+                                    >
+                                        Kirim
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    {showSelesai && !showLevelOptions && !showReplyForm && (
+                        <div className="px-16 py-5">
+                            <button
+                                type="button"
+                                className="px-3 rounded-md bg-green-500 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                onClick={() => {
+                                    window.location.href = route(
+                                        "prosesKomplainKepalaBidang"
                                     );
                                 }}
                             >
@@ -463,15 +538,13 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                     {showLevelOptions && !showReplyForm && (
                         <div className="py-5 px-16 mt-2">
                             {/* Your level options here */}
-                            <h1 className="text-black font-bold">
-                                Pilih Penanggung Jawab
-                            </h1>
+                            <h1 className="text-black font-bold">Pilih unit</h1>
                             <div className="mt-2">
                                 <select
                                     className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2"
-                                    name="penerima"
-                                    value={selectedPenerima}
-                                    onChange={handleSelectChange}
+                                    name="unit"
+                                    value={formData.unit}
+                                    onChange={handleChange}
                                 >
                                     {/* Kondisional untuk level kuning */}
                                     {komplainDetail.namaLevel === "Kuning" && (
@@ -510,7 +583,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                                     Kepala Ruang Rekam Medis
                                                 </option>
                                                 <option>
-                                                    Kepala Ruang Gizi
+                                                    Kepala Ruang Unit Gizi
                                                 </option>
                                                 <option>
                                                     Kepala Ruang Rawat Inap 1
@@ -611,26 +684,10 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                 <button
                                     type="submit"
                                     className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={handleSubmitSelect}
                                 >
                                     Submit
                                 </button>
                             </div>
-                        </div>
-                    )}
-                    {showSelesai && showLevelOptions && !showReplyForm && (
-                        <div className="px-16 py-5">
-                            <button
-                                type="button"
-                                className="px-3 rounded-md bg-green-500 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                onClick={() => {
-                                    window.location.href = route(
-                                        "daftarKomplainKepalaBidang"
-                                    );
-                                }}
-                            >
-                                Kembali ke daftar
-                            </button>
                         </div>
                     )}
                     {showGantiunit && (

@@ -114,7 +114,7 @@ class KomplainController extends Controller
             ->select('id', 'nama', 'judul', 'unit', 'created_at')->get();
         return response()->json($komplains);
     }
-    public function getDataKomplainLevel()
+    public function getDataKomplainWaiting()
 {  
     $komplains = Komplain::join('level_komplain', 'komplain.id_level', '=', 'level_komplain.id')
     ->where(function($query) {
@@ -123,15 +123,16 @@ class KomplainController extends Controller
             ->orWhere('komplain.id_level', 4);
     })
     ->where(function($query) {
-        $query->where('komplain.id_status', 2)
-            ->orWhere('komplain.id_status', 3)
-            ->orWhere('komplain.id_status', 4);
+        $query->where('komplain.keterangan', 'menunggu konfirmasi');
+    })
+    ->where(function($query) {
+        $query->where('komplain.id_status', 5);
     })
     ->where(function($query) {
         $query->where('penerima', 'LIKE', '%Kepala Ruang%')
             ->orWhere('penerima', 'LIKE', '%Kepala Bidang%');
     })
-        ->select('komplain.id', 'komplain.nama', 'komplain.judul', 'komplain.unit', 'komplain.created_at', 'level_komplain.namaLevel', 'komplain.id_level', 'komplain.id_status', 'komplain.penerima')
+        ->select('komplain.id', 'komplain.nama', 'komplain.judul', 'komplain.unit', 'komplain.created_at', 'level_komplain.namaLevel', 'komplain.id_level', 'komplain.id_status', 'komplain.penerima', 'komplain.keterangan')
         ->get();
     
     return response()->json($komplains);
@@ -548,6 +549,13 @@ public function getDataRiwayatKomplainLevelMerah()
             'description' => 'Selamat datang di website',
         ]);
     }
+    public function IsiPesanProsesKomplainCSO()
+    {
+        return Inertia::render('IsiPesanProsesKomplainCSO', [
+            'title'=> "Wew Homepage",
+            'description' => 'Selamat datang di website',
+        ]);
+    }
     public function IsiPesanKomplainRiwayatCSO()
     {
         return Inertia::render('IsiPesanRiwayatKomplainCSO', [
@@ -607,6 +615,13 @@ public function getDataRiwayatKomplainLevelMerah()
     public function IsiFeedback()
     {
         return Inertia::render('Feedback', [
+            'title'=> "Wew Homepage",
+            'description' => 'Selamat datang di website',
+        ]);
+    }
+    public function ProsesKomplainCSO()
+    {
+        return Inertia::render('ProsesKomplainCSO', [
             'title'=> "Wew Homepage",
             'description' => 'Selamat datang di website',
         ]);
@@ -713,6 +728,7 @@ public function getDataRiwayatKomplainLevelMerah()
             $komplain->nama = $request->input('nama');
             $komplain->judul = $request->input('judul');
             $komplain->kronologi = $request->input('kronologi');
+            $komplain->keterangan = $request->input('keterangan');
 
             // Simpan PDF di server
             $fileName = time() . '_laporan.pdf';
@@ -747,6 +763,19 @@ public function getDataRiwayatKomplainLevelMerah()
             $komplain->save();
     
             return response()->json(['message' => 'Komplain berhasil terkirim dan PDF disimpan'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function editKeterangan(Request $request){
+        try {
+            $komplain = Komplain::findOrFail($request->input('id'));
+            $komplain->keterangan = $request->input('keterangan');
+    
+            // Simpan data komplain
+            $komplain->save();
+    
+            return response()->json(['message' => 'Komplain berhasil terupdate'], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

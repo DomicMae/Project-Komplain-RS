@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/dataKomplain', [KomplainController::class, 'getDataKomplain']); //Mengambil data komplain dengan ID status = 1 
-Route::get('/dataKomplainSemuaLevel', [KomplainController::class, 'getDataKomplainLevel']); //Mengambil data komplain (Tidak terpakai)
+Route::get('/dataKomplainWaiting', [KomplainController::class, 'getDataKomplainWaiting']); //Mengambil data komplain (Tidak terpakai)
 Route::get('/dataKomplainLevelHijau', [KomplainController::class, 'getDataKomplainLevelHijau']); //Mengambil data komplain dengan ID level = 1 & 2
 Route::get('/dataKomplainLevelMerah', [KomplainController::class, 'getDataKomplainLevelMerah']); //Mengambil data komplain dengan ID level = 2 & 3 
 

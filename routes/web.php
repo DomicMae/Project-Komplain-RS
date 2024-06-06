@@ -33,6 +33,8 @@ Route::get('/isiPesanKomplainKepalaRuang', [KomplainController::class, 'IsiPesan
 Route::get('/isiPesanKomplainKepalaBidang', [KomplainController::class, 'IsiPesanKomplainKepalaBidang'])->middleware(['auth', 'verified', 'role:adminKepalaBidang'])->name('isiPesanKomplainKepalaBidang'); //Isi Pesan Komplain By ID Komplain Admin Kepala Bidang
 
 //Admin CSO
+Route::get('/prosesKomplainCSO', [KomplainController::class, 'ProsesKomplainCSO'])->middleware(['auth', 'verified', 'role:adminCSO'])->name('prosesKomplainCSO'); //Daftar Proses Komplain Admin untuk CSO
+Route::get('/isiPesanProsesKomplainCSO', [KomplainController::class, 'IsiPesanProsesKomplainCSO'])->middleware(['auth', 'verified', 'role:adminCSO'])->name('isiPesanProsesKomplainCSO'); //Isi Pesan Komplain By ID Komplain Admin CSO
 Route::get('/riwayatKomplainCSO', [KomplainController::class, 'RiwayatKomplainCSO'])->middleware(['auth', 'verified', 'role:adminCSO'])->name('riwayatKomplainCSO'); //Daftar Riwayat Komplain Admin untuk CSO
 Route::get('/isiPesanRiwayatKomplainCSO', [KomplainController::class, 'IsiPesanKomplainRiwayatCSO'])->middleware(['auth', 'verified', 'role:adminCSO'])->name('isiPesanRiwayatKomplainCSO'); //Isi Pesan Komplain By ID Komplain Admin CSO
 

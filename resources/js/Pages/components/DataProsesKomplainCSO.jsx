@@ -28,7 +28,7 @@ const DataProsesKomplainCSO = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://193.168.195.191/api/dataKomplainSemuaLevel`
+                    `http://127.0.0.1:8000/api/dataKomplainWaiting`
                 );
                 let sortedKomplain = response.data;
 
@@ -124,7 +124,7 @@ const DataProsesKomplainCSO = ({ user }) => {
                                 {/* Struktur link */}
                                 <Link
                                     key={komplain.id}
-                                    href={`isiPesanProsesKomplainKepalaBidang?id=${komplain.id}`}
+                                    href={`isiPesanProsesKomplainCSO?id=${komplain.id}`}
                                     className={`col-span-6 rounded-lg grid grid-cols-6 gap-4 justify-center items-center ${bgClass} ${borderClass}`}
                                 >
                                     {/* Grid 01: komplain.nama */}
@@ -142,13 +142,14 @@ const DataProsesKomplainCSO = ({ user }) => {
                                     {/* Grid 03: countdown */}
                                     <div
                                         className={`flex justify-center items-center ${
-                                            komplain.namaLevel === "Kuning"
-                                                ? "text-blue-500"
+                                            komplain.keterangan ===
+                                            "menunggu konfirmasi"
+                                                ? "text-yellow-500"
                                                 : "text-blue-500"
                                         }`}
                                     >
                                         <p className="text-sm font-semibold mb-2 text-center">
-                                            Proses
+                                            Menunggu Konfirmasi
                                         </p>
                                     </div>
                                     {/* Grid 04: unit */}

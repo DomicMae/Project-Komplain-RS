@@ -35,9 +35,8 @@ const variants = {
     nonExpanded: { width: "7.5%" },
 };
 
-const NavigationBarDashboardCSO = ({ user }) => {
-    console.log("isUser?", user);
-    const [activeNavIndex, setActiveNavIndex] = useState(0);
+const NavigationBarProsesKomplainCSO = ({ user }) => {
+    const [activeNavIndex, setActiveNavIndex] = useState(2);
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
@@ -75,7 +74,7 @@ const NavigationBarDashboardCSO = ({ user }) => {
                     <div
                         key={index}
                         className={
-                            "flex space-x-2 p-2 rounded" +
+                            " flex space-x-2 p-2 rounded cursor-pointer" +
                             (activeNavIndex === index
                                 ? " bg-[#1BBD36] text-white font-semibold"
                                 : "")
@@ -100,4 +99,4 @@ const NavigationBarDashboardCSO = ({ user }) => {
     );
 };
 
-export default NavigationBarDashboardCSO;
+export default NavigationBarProsesKomplainCSO;

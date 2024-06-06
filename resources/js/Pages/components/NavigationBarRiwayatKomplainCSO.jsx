@@ -20,6 +20,11 @@ const navLink = [
         route: "daftarKomplain",
     },
     {
+        name: "Proses Komplain",
+        icon: RefreshCcw,
+        route: "prosesKomplainCSO",
+    },
+    {
         name: "Riwayat Komplain",
         icon: History,
         route: "riwayatKomplainCSO",
@@ -31,7 +36,7 @@ const variants = {
 };
 
 const NavigationBarRiwayatKomplainCSO = ({ user }) => {
-    const [activeNavIndex, setActiveNavIndex] = useState(2);
+    const [activeNavIndex, setActiveNavIndex] = useState(3);
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
