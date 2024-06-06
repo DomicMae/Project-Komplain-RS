@@ -116,7 +116,7 @@ const InputDataKomplain = ({ title, description }) => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); // Mencegah perilaku default dari event klik
 
         // Validasi input nomor telepon jika telah diisi
@@ -162,37 +162,41 @@ const InputDataKomplain = ({ title, description }) => {
         formDataToSend.append("kronologi", formData.kronologi);
         formDataToSend.append("gambar", formData.gambar);
 
-        axios
-            .post("http://193.168.195.191/api/addkomplain", formDataToSend)
-            .then((response) => {
-                // Handle response jika berhasil
-                setApiResponse(response.data);
-                setShowModal(true);
+        try {
+            const response = await axios.post(
+                "http://193.168.195.191/api/addkomplain",
+                formDataToSend
+            );
 
-                // Panggil fungsi sendEmail setelah respons berhasil
-                sendEmail();
-                sendLiveTracking();
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Handle error jika terjadi kesalahan
-                console.error(error);
-            });
+            // Handle response jika berhasil
+            setApiResponse(response.data);
+            setShowModal(true);
+
+            // Panggil fungsi sendEmail dan sendLiveTracking setelah respons berhasil
+            await sendEmail();
+            await sendLiveTracking();
+
+            // Reload the window after all actions have successfully completed
+            window.location.reload();
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
 
-    const sendEmail = () => {
-        axios
-            .get("http://193.168.195.191/api/sendemail")
-            .then((response) => {
-                // Handle response jika berhasil
-                console.log(response.data);
-            })
-            .catch((error) => {
-                // Handle error jika terjadi kesalahan
-                console.error(error);
-            });
+    const sendEmail = async () => {
+        try {
+            const response = await axios.get(
+                "http://193.168.195.191/api/sendemail"
+            );
+            // Handle response jika berhasil
+            console.log(response.data);
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
-    const sendLiveTracking = () => {
+    const sendLiveTracking = async () => {
         const today = new Date();
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -202,18 +206,19 @@ const InputDataKomplain = ({ title, description }) => {
         const seconds = String(today.getSeconds()).padStart(2, "0");
 
         const tanggalUpdate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        axios
-            .post("http://193.168.195.191/api/addLiveTracking", {
-                tanggal_update: tanggalUpdate,
-            })
-            .then((response) => {
-                // Handle response jika berhasil
-                console.log(response.data);
-            })
-            .catch((error) => {
-                // Handle error jika terjadi kesalahan
-                console.error(error);
-            });
+        try {
+            const response = await axios.post(
+                "http://193.168.195.191/api/addLiveTracking",
+                {
+                    tanggal_update: tanggalUpdate,
+                }
+            );
+            // Handle response jika berhasil
+            console.log(response.data);
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
 
     const handleCopyToClipboard = (kode) => {

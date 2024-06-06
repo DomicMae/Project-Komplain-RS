@@ -91,7 +91,7 @@ const CekCodePage = ({ title, description }) => {
         }
     };
 
-    const handleSubmitReply = (e) => {
+    const handleSubmitReply = async (e) => {
         e.preventDefault(); // Mencegah perilaku default dari event klik
 
         const formDataToSend = new FormData();
@@ -120,42 +120,37 @@ const CekCodePage = ({ title, description }) => {
 
         formDataToSend.append("keterangan", reply);
 
-        axios
-            .post("http://193.168.195.191/api/addkomplain", formDataToSend)
-            .then((response) => {
-                // Handle response jika berhasil
-                setApiResponse(response.data);
-                setShowModal(true);
+        try {
+            const response = await axios.post(
+                "http://193.168.195.191/api/addkomplain",
+                formDataToSend
+            );
 
-                // Panggil fungsi sendEmail setelah respons berhasil
-                sendEmail();
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Handle error jika terjadi kesalahan
-                console.error("There was an error!", error);
-                if (error.response) {
-                    console.error("Data:", error.response.data);
-                    console.error("Status:", error.response.status);
-                    console.error("Headers:", error.response.headers);
-                } else if (error.request) {
-                    console.error("Request:", error.request);
-                } else {
-                    console.error("Error message:", error.message);
-                }
-            });
+            // Handle response jika berhasil
+            setApiResponse(response.data);
+            setShowModal(true);
+
+            // Panggil fungsi sendEmail dan sendLiveTracking setelah respons berhasil
+            await sendEmail();
+
+            // Reload the window after all actions have successfully completed
+            window.location.reload();
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
-    const sendEmail = () => {
-        axios
-            .get("http://193.168.195.191/api/sendemailCSOAgain")
-            .then((response) => {
-                // Handle response jika berhasil
-                console.log(response.data);
-            })
-            .catch((error) => {
-                // Handle error jika terjadi kesalahan
-                console.error(error);
-            });
+    const sendEmail = async () => {
+        try {
+            const response = await axios.get(
+                "http://193.168.195.191/api/sendemail"
+            );
+            // Handle response jika berhasil
+            console.log(response.data);
+        } catch (error) {
+            // Handle error jika terjadi kesalahan
+            console.error(error);
+        }
     };
     const handleCopyToClipboard = (kode) => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
