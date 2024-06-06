@@ -68,7 +68,6 @@
     <p class="c">Kronologi: {{ $komplain->kronologi }}</p>
     <p class="laporan">Laporan: {{ $komplain->laporan }}</p>
     @if ($komplain->gambar)
-        <p>Gambar:</p>
         <img src="{{ public_path('uploads/images/' . $komplain->gambar) }}" alt="Gambar Komplain" style="max-width: 100%; height: auto;">
     @else
         <p>Gambar: Tidak ada gambar</p>
