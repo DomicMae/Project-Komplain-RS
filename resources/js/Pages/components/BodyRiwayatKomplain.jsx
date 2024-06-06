@@ -93,20 +93,25 @@ const BodyRiwayatKomplain = ({ user }) => {
                 {/* Tabel keterangan */}
                 <div className="rounded-md py-1 px-4 md:px-5 grid gap-4">
                     <div className="bg-gray-900 rounded-lg p-4 grid grid-cols-1 md:grid-cols-7 gap-4">
+                        {/* Grid 01: Nama */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-start">
                             <p className="text-left text-white">Nama</p>
                         </div>
+                        {/* Grid 02: Judul */}
                         <div className="col-span-1 md:col-span-2 flex items-center justify-start">
                             <p className="text-left text-white">Judul</p>
                         </div>
+                        {/* Grid 03: Kronologi */}
                         <div className="col-span-1 md:col-span-2 flex items-center justify-start md:justify-center">
                             <p className="text-left md:text-center text-white">
                                 Kronologi
                             </p>
                         </div>
+                        {/* Grid 04: Unit */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-center">
                             <p className="text-center text-white">Unit</p>
                         </div>
+                        {/* Grid 05: Tanggal */}
                         <div className="col-span-1 md:col-span-1 flex items-center justify-center">
                             <p className="text-center text-white">Tanggal</p>
                         </div>
@@ -166,7 +171,7 @@ const BodyRiwayatKomplain = ({ user }) => {
                                         </p>
                                     </div>
                                     {/* Grid 05: tanggal */}
-                                    <div className="col-span-1 flex items-center justify-end">
+                                    <div className="col-span-1 flex items-center justify-center md:justify-end">
                                         <p className="text-sm font-semibold mb-2 text-center text-black">
                                             {tanggal} {bulan} {tahun}
                                         </p>
