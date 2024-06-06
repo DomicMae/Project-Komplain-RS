@@ -57,6 +57,7 @@ Route::post('/editPenerima',[KomplainController::class, 'editPenerima'])->name('
 Route::post('/reply', [KomplainController::class, 'reply'])->name('reply.komplain'); //Mengganti status,level pada komplain dan penambahan laporan
 Route::post('/editLevel', [KomplainController::class, 'edit_level'])->name('edit.Level.komplain'); //Mengganti status,level pada komplain dan penambahan penerima 
 Route::post('/editStatus', [KomplainController::class, 'edit_status'])->name('edit.Status.komplain'); //Mengganti status  pada komplain dan penambahan penerima 
+Route::post('/editKeterangan', [KomplainController::class, 'editKeterangan'])->name('edit.Keterangan.komplain'); //Mengganti status,level pada komplain dan penambahan laporan
 
 Route::post('/addkomplain', [KomplainController::class, 'store'])->name('create.komplain');
 // Untuk menggunakan controller Anda, sesuaikan dengan nama controller Anda
