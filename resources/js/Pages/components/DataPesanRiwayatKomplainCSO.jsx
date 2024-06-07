@@ -312,6 +312,12 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
         setShowLevelOptions(false);
         setShowGantiunit(true);
     };
+    const handleShowSelesai = () => {
+        setShowLevelOptions(false);
+        setShowReplyForm(false); // Pastikan showReplyForm diubah menjadi false
+        setShowGantiunit(false);
+        setShowSelesai(true);
+    };
     const handleShowReplyForm = () => {
         setShowReplyForm(true);
         setShowLevelOptions(false);
@@ -419,26 +425,34 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
                             </button>
                         </div>
                     )}
-                    {!showSelesai && (
-                        <div className="px-16 mt-8 flex items-center space-x-4">
-                            <button
-                                className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
-                                style={{ width: "150px", height: "40px" }}
-                                onClick={handleShowReplyForm}
-                            >
-                                <Reply />
-                                <span>Reply</span>
-                            </button>
-                            <button
-                                className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
-                                style={{ width: "150px", height: "40px" }}
-                                onClick={handleShowLevelOptionsClick}
-                            >
-                                <Forward />
-                                <span>Pilih Level</span>
-                            </button>
-                        </div>
-                    )}
+                    {!showSelesai &&
+                        !komplainDetail.keterangan ===
+                            "selesai"(
+                                <div className="px-16 mt-8 flex items-center space-x-4">
+                                    <button
+                                        className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
+                                        style={{
+                                            width: "150px",
+                                            height: "40px",
+                                        }}
+                                        onClick={handleShowReplyForm}
+                                    >
+                                        <Reply />
+                                        <span>Reply</span>
+                                    </button>
+                                    <button
+                                        className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 border border-gray-400 hover:bg-gray-200"
+                                        style={{
+                                            width: "150px",
+                                            height: "40px",
+                                        }}
+                                        onClick={handleShowLevelOptionsClick}
+                                    >
+                                        <Forward />
+                                        <span>Pilih Level</span>
+                                    </button>
+                                </div>
+                            )}
                     {showReplyForm && !showLevelOptions && (
                         <div>
                             <form
