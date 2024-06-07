@@ -7,12 +7,48 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [reply, setReply] = useState(""); // State untuk menyimpan nilai balasan
 
+    const [selectedLevel, setSelectedLevel] = useState("");
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
             ...prevState,
             [name]: value,
         }));
+    };
+    const [formData, setFormData] = useState({
+        unit: "",
+        penerima: "",
+        laporan: "",
+        idStatus: "",
+        idLevel: "",
+    });
+
+    // Fungsi untuk memetakan string level ke angka
+    const mapLevelToNumber = (level) => {
+        switch (level) {
+            case "green":
+                return 2;
+            case "yellow":
+                return 3;
+            case "red":
+                return 4;
+            default:
+                return null; // Mengembalikan null untuk level yang tidak valid
+        }
+    };
+    // Fungsi untuk memetakan string level ke angka
+    const mapLevelToString = (level) => {
+        switch (level) {
+            case "green":
+                return "hijau";
+            case "yellow":
+                return "kuning";
+            case "red":
+                return "merah";
+            default:
+                return null; // Mengembalikan null untuk level yang tidak valid
+        }
     };
 
     const handleEditLevel = (e) => {
