@@ -105,11 +105,13 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
         const id = urlParams.get("id");
         // Mengambil ID komplain dari formulir atau sumber lainnya
         const komplainId = id; // Pastikan formData.id tersedia
-        const statusId = 3;
+        const statusId = 4;
+        const keterangan = "menunggu laporan";
 
         const formDataToSend = {
             id: komplainId, // Mengirim ID komplain yang ingin diubah
             id_status: statusId, // Mengirim nilai baru untuk kolom idStatus
+            keterangan: keterangan, //Mengirim value selesai
         };
 
         axios
@@ -638,9 +640,6 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
                                                     Kepala Bidang Umum dan
                                                     Keuangan
                                                 </option>
-                                                <option>
-                                                    Kepala Sarana dan Prasarana
-                                                </option>
                                             </optgroup>
                                         </>
                                     )}
@@ -666,9 +665,6 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
                                                 <option>
                                                     Kepala Bidang Umum dan
                                                     Kuangan
-                                                </option>
-                                                <option>
-                                                    Kepala Sarana dan Prasarana
                                                 </option>
                                             </optgroup>
                                         </>

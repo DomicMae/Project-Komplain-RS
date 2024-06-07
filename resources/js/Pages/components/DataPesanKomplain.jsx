@@ -766,9 +766,6 @@ const DataPesanKomplain = ({ user }) => {
                                             <option className="">
                                                 Kepala Bidang Umum dan Kuangan
                                             </option>
-                                            <option className="">
-                                                Kepala Sarana dan Prasarana
-                                            </option>
                                         </optgroup>
                                     </>
                                 )}
@@ -791,9 +788,6 @@ const DataPesanKomplain = ({ user }) => {
                                             </option>
                                             <option>
                                                 Kepala Bidang Umum dan Kuangan
-                                            </option>
-                                            <option>
-                                                Kepala Sarana dan Prasarana
                                             </option>
                                         </optgroup>
                                     </>

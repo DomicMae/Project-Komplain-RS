@@ -640,9 +640,6 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
                                                     Kepala Bidang Umum dan
                                                     Keuangan
                                                 </option>
-                                                <option>
-                                                    Kepala Sarana dan Prasarana
-                                                </option>
                                             </optgroup>
                                         </>
                                     )}
@@ -668,9 +665,6 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
                                                 <option>
                                                     Kepala Bidang Umum dan
                                                     Kuangan
-                                                </option>
-                                                <option>
-                                                    Kepala Sarana dan Prasarana
                                                 </option>
                                             </optgroup>
                                         </>

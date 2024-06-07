@@ -569,9 +569,6 @@ const DataPesanKomplainKepalaRuang = ({ user }) => {
                                                     Kepala Bidang Umum dan
                                                     Keuangan
                                                 </option>
-                                                <option>
-                                                    Kepala Sarana dan Prasarana
-                                                </option>
                                             </optgroup>
                                         </>
                                     )}
