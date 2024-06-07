@@ -28,7 +28,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('NotifikasiKomplainMasuk run');
 
-        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new NotifikasiKomplainMasuk($data_email));
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com","csorgsr@gmai.com"])->send(new NotifikasiKomplainMasuk($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
@@ -54,7 +54,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('NotifikasiKomplainMasuk run');
 
-        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new NotifikasiKomplainLamaMasuk($data_email));
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com", "csorgsr@gmai.com"])->send(new NotifikasiKomplainLamaMasuk($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
@@ -86,7 +86,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('NotifikasiKomplainMasuk run');
 
-        Mail::to(["ardontallan0904@gmail.com"])->send(new NotifikasiRuangKomplainMasuk($data_email));
+        Mail::to(["kepalaruangrsgr@gmail.com"])->send(new NotifikasiRuangKomplainMasuk($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
@@ -118,7 +118,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('NotifikasiKomplainMasuk run');
 
-        Mail::to(["ardonyunors147@gmail.com"])->send(new NotifikasiBidangKomplainMasuk($data_email));
+        Mail::to(["kepalabidangrsgr@gmail.com"])->send(new NotifikasiBidangKomplainMasuk($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
