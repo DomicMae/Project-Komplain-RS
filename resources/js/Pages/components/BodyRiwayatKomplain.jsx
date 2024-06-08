@@ -112,7 +112,7 @@ const BodyRiwayatKomplain = ({ user }) => {
                                 className={`text-left text-white ${
                                     isMobile
                                         ? "justify-start"
-                                        : "md:justify-center"
+                                        : "md:justify-start"
                                 }`}
                             >
                                 Judul
