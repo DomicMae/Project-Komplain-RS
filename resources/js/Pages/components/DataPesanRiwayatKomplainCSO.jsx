@@ -426,7 +426,7 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
                         </div>
                     )}
                     {!showSelesai &&
-                        !komplainDetail.keterangan ===
+                        komplainDetail.keterangan !==
                             "selesai"(
                                 <div className="px-16 mt-8 flex items-center space-x-4">
                                     <button
