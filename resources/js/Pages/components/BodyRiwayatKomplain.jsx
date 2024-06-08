@@ -192,7 +192,7 @@ const BodyRiwayatKomplain = ({ user }) => {
                                         </p>
                                     </div>
                                     {/* Grid 02: judul */}
-                                    <div className="col-span-1 md:col-span-2 flex items-center justify-start md:justify-center">
+                                    <div className="col-span-1 md:col-span-2 flex items-center justify-start md:justify-start">
                                         <p className="text-sm font-semibold mb-2 text-center text-black">
                                             {komplain.judul}
                                         </p>
