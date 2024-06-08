@@ -143,7 +143,7 @@ const CekCodePage = ({ title, description }) => {
     const sendEmail = async () => {
         try {
             const response = await axios.get(
-                "http://193.168.195.191/api/sendemail"
+                "http://193.168.195.191/api/sendemailCSOAgain"
             );
             // Handle response jika berhasil
             console.log(response.data);
