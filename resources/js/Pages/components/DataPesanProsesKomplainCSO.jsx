@@ -22,7 +22,7 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://193.168.195.191/api/dataKomplainKepalaBidang/${id}`
+                    `http://193.168.195.191/api/dataKomplainById/${id}`
                 );
                 setKomplainDetail(response.data);
 
@@ -203,7 +203,13 @@ const DataPesanProsesKomplainCSO = ({ user }) => {
                                                 komplainDetail.namaLevel ===
                                                 "Merah"
                                                     ? "bg-red-500"
-                                                    : "bg-yellow-500"
+                                                    : komplainDetail.namaLevel ===
+                                                      "Kuning"
+                                                    ? "bg-yellow-500"
+                                                    : komplainDetail.namaLevel ===
+                                                      "Hijau"
+                                                    ? "bg-green-500"
+                                                    : ""
                                             }`}
                                         >
                                             Level {komplainDetail.namaLevel}
