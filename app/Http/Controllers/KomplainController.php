@@ -262,6 +262,19 @@ public function getDataRiwayatKomplainLevelMerah()
 
         return response()->json($komplain);
     }
+    public function getIsiPesanKomplainCSOById($id)
+    {
+        $komplain = Komplain::leftJoin('level_komplain', 'komplain.id_level', '=', 'level_komplain.id')
+                        ->where('komplain.id', $id)
+                        ->select('komplain.*', 'level_komplain.namaLevel')
+                        ->first();
+
+        if (!$komplain) {
+            return response()->json(['message' => 'Komplain not found'], 404);
+        }
+
+        return response()->json($komplain);
+    }
     public function getIsiPesanKomplainKepalaRuangById($id)
     {
         $komplain = Komplain::leftJoin('level_komplain', 'komplain.id_level', '=', 'level_komplain.id')
