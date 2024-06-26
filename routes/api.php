@@ -36,6 +36,7 @@ Route::get('/dataRiwayatKomplainLevelHijau', [KomplainController::class, 'getDat
 Route::get('/dataRiwayatKomplainLevelMerah', [KomplainController::class, 'getDataRiwayatKomplainLevelMerah']); //Mengambil data komplain dengan ID status = 5 
 
 Route::get('/dataKomplainById/{id}', [KomplainController::class, 'getIsiPesanKomplainById']); //Mengambil data untuk isi pesan by id (CSO)
+Route::get('/dataKomplainCSO/{id}', [KomplainController::class, 'getIsiPesanKomplainCSOById']); //Mengambil data untuk isi pesan proses by id (CSO) 
 Route::get('/dataKomplainKepalaRuang/{id}', [KomplainController::class, 'getIsiPesanKomplainKepalaRuangById']); //Mengambil data untuk isi pesan by id (Kepala Ruang)
 Route::get('/dataKomplainKepalaBidang/{id}', [KomplainController::class, 'getIsiPesanKomplainKepalaBidangById']); //Mengambil data untuk isi pesan by id (Kepala Bidang)
 Route::get('/dataKomplainNoTelp/{no_telp}', [KomplainController::class, 'getIsiPesanKomplainByTelepon']); //Cek Riwayat Komplain By Telp
