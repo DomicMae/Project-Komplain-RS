@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "@inertiajs/react";
+import Datepicker from "react-tailwindcss-datepicker";
 import { Trash2 } from "lucide-react";
 
 const DataRiwayatKomplainCSO = ({ user }) => {
     const [daftarKomplain, setDaftarKomplain] = useState([]);
     const [sortBy, setSortBy] = useState("latest"); // State untuk opsi sort by
+    const [selectedDate, setSelectedDate] = useState(null); // State untuk tanggal yang dipilih
+
+    const [formData, setFormData] = useState({
+        tanggal_kejadian: "",
+    });
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -18,6 +24,17 @@ const DataRiwayatKomplainCSO = ({ user }) => {
 
         return () => clearInterval(intervalId);
     }, []);
+
+    const [value, setValue] = useState({
+        startDate: null,
+        endDate: null,
+    });
+
+    const handleValueChange = (date) => {
+        console.log("Selected date:", date);
+        setValue({ startDate: date });
+        setFormData({ ...formData, tanggal_kejadian: date.startDate });
+    };
 
     // Fungsi untuk mengubah opsi sort by
     const handleSortByChange = (e) => {
@@ -32,12 +49,32 @@ const DataRiwayatKomplainCSO = ({ user }) => {
                 );
                 let sortedKomplain = response.data;
 
-                // Mengurutkan data berdasarkan tanggal
-                sortedKomplain.sort((a, b) => {
-                    const dateA = new Date(a.created_at);
-                    const dateB = new Date(b.created_at);
-                    return sortBy === "latest" ? dateB - dateA : dateA - dateB;
-                });
+                // Mengurutkan data berdasarkan opsi sortBy
+                if (sortBy === "latest" || sortBy === "oldest") {
+                    sortedKomplain.sort((a, b) => {
+                        const dateA = new Date(a.created_at);
+                        const dateB = new Date(b.created_at);
+                        return sortBy === "latest"
+                            ? dateB - dateA
+                            : dateA - dateB;
+                    });
+                } else if (
+                    sortBy === "selectedDate" &&
+                    formData.tanggal_kejadian
+                ) {
+                    const selectedDateObj = new Date(formData.tanggal_kejadian);
+                    sortedKomplain = sortedKomplain.filter((komplain) => {
+                        const komplainDate = new Date(komplain.created_at);
+                        return (
+                            komplainDate.getDate() ===
+                                selectedDateObj.getDate() &&
+                            komplainDate.getMonth() ===
+                                selectedDateObj.getMonth() &&
+                            komplainDate.getFullYear() ===
+                                selectedDateObj.getFullYear()
+                        );
+                    });
+                }
 
                 setDaftarKomplain(sortedKomplain);
             } catch (error) {
@@ -46,7 +83,7 @@ const DataRiwayatKomplainCSO = ({ user }) => {
         };
 
         fetchData();
-    }, [sortBy]); // Memicu pengambilan data saat sortBy berubah
+    }, [sortBy, formData.tanggal_kejadian]); // Memicu pengambilan data saat sortBy berubah
 
     return (
         <div className="w-full">
@@ -74,7 +111,26 @@ const DataRiwayatKomplainCSO = ({ user }) => {
                             >
                                 Oldest
                             </option>
+                            <option
+                                value="selectedDate"
+                                className="text-sm text-indigo-800"
+                            >
+                                Selected Date
+                            </option>
                         </select>
+                        {sortBy === "selectedDate" && (
+                            <div className="flex ml-2 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                <Datepicker
+                                    useRange={false}
+                                    asSingle={true}
+                                    value={value.startDate}
+                                    onChange={handleValueChange}
+                                    dateFormat="dd-MM-yyyy" // Mengubah format tanggal di DatePicker
+                                    className="block flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholderText="Tanggal Kejadian"
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/* Tabel keterangan */}

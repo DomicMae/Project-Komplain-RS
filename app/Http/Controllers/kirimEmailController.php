@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\CountdownCSO;
+use App\Mail\KirimLaporanKepalaBidang;
+use App\Mail\KirimLaporanKepalaRuang;
 use App\Mail\NotifikasiBidangKomplainMasuk;
 use App\Mail\NotifikasiKomplainLamaMasuk;
 use App\Models\Komplain;
@@ -95,7 +97,7 @@ class kirimEmailController extends Controller
         // Hitung waktu eksekusi
         $execution_time = $end_time->diffInSeconds($start_time);
         Log::info("Execution time: {$execution_time} seconds");
-        return 'Sukses mengirimkan email>';
+        return 'Sukses mengirimkan email ke Kepala Ruang';
     }
 
     public function indexKepalaBidang(Request $request){
@@ -127,7 +129,71 @@ class kirimEmailController extends Controller
         // Hitung waktu eksekusi
         $execution_time = $end_time->diffInSeconds($start_time);
         Log::info("Execution time: {$execution_time} seconds");
-        return 'Sukses mengirimkan email';
+        return 'Sukses mengirimkan email ke Kepala Bidang';
+    }
+
+    public function kirimLaporanKepalaRuang(Request $request){
+        // Ambil data input dari permintaan
+        $penerima = $request->input('penerima');
+        $nama = $request->input('nama');
+        $judul = $request->input('judul');
+        $kronologi = $request->input('kronologi');
+        $level = $request->input('level');
+
+        $data_email = [
+            'penerima' => $penerima,
+            'nama' => $nama,
+            'judul' => $judul,
+            'kronologi' => $kronologi,
+            'level' => $level,
+        ];
+
+        // Catat waktu mulai pengiriman email
+        $start_time = now();
+        Log::info('KirimLaporanKepalaRuang run');
+
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaRuang($data_email));
+
+        // Catat waktu selesai pengiriman email
+        $end_time = now();
+        Log::info('KirimLaporanKepalaRuang done');
+        
+        // Hitung waktu eksekusi
+        $execution_time = $end_time->diffInSeconds($start_time);
+        Log::info("Execution time: {$execution_time} seconds");
+        return 'Sukses mengirimkan email ke CSO';
+    }
+
+    public function kirimLaporanKepalaBidang(Request $request){
+        // Ambil data input dari permintaan
+        $penerima = $request->input('penerima');
+        $nama = $request->input('nama');
+        $judul = $request->input('judul');
+        $kronologi = $request->input('kronologi');
+        $level = $request->input('level');
+
+        $data_email = [
+            'penerima' => $penerima,
+            'nama' => $nama,
+            'judul' => $judul,
+            'kronologi' => $kronologi,
+            'level' => $level,
+        ];
+
+        // Catat waktu mulai pengiriman email
+        $start_time = now();
+        Log::info('KirimLaporanKepalaBidang run');
+
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaBidang($data_email));
+
+        // Catat waktu selesai pengiriman email
+        $end_time = now();
+        Log::info('KirimLaporanKepalaBidang done');
+        
+        // Hitung waktu eksekusi
+        $execution_time = $end_time->diffInSeconds($start_time);
+        Log::info("Execution time: {$execution_time} seconds");
+        return 'Sukses mengirimkan email ke CSO';
     }
 
     public function countdown_cso(){

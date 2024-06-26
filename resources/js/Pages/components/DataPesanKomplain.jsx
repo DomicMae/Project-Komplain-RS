@@ -27,6 +27,10 @@ const DataPesanKomplain = ({ user }) => {
         }));
     };
 
+    const handleCancel = () => {
+        setShowDropdown(false);
+    };
+
     const handleSubmit = (e) => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
@@ -276,6 +280,7 @@ const DataPesanKomplain = ({ user }) => {
     const [showLevelOptions, setShowLevelOptions] = useState(false);
     const [showGantiunit, setShowGantiunit] = useState(false);
     const [showSelesai, setShowSelesai] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const handleShowLevelOptionsClick = () => {
         setShowLevelOptions(true);
@@ -292,6 +297,7 @@ const DataPesanKomplain = ({ user }) => {
         setShowReplyForm(true);
         setShowLevelOptions(false);
         setShowGantiunit(false); // Pastikan showLevelOptions diubah menjadi false
+        setShowDropdown(!showDropdown);
     };
 
     const handleShowSelesai = () => {
@@ -340,16 +346,140 @@ const DataPesanKomplain = ({ user }) => {
                                         <div className="border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2">
                                             {komplainDetail.unit}
                                         </div>
-                                        <button
-                                            className="w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 hover:bg-gray-200"
-                                            style={{
-                                                width: "20px",
-                                                height: "20px",
-                                            }}
-                                            onClick={handleShowGantiunitClick}
-                                        >
-                                            <SquarePen />
-                                        </button>
+                                        {!showDropdown && (
+                                            <button
+                                                id="dropdownDefaultButton"
+                                                data-dropdown-toggle="dropdown"
+                                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                type="button"
+                                                onClick={
+                                                    handleShowGantiunitClick
+                                                }
+                                            >
+                                                Ganti Unit
+                                            </button>
+                                        )}
+                                        <div>
+                                            {showDropdown && (
+                                                <div className="flex items-center gap-x-4">
+                                                    <select
+                                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                        name="unit"
+                                                        value={formData.unit}
+                                                        onChange={handleChange}
+                                                    >
+                                                        <option
+                                                            value=""
+                                                            disabled
+                                                        >
+                                                            Pilih unit
+                                                        </option>
+                                                        <optgroup label="Bidang Pelayanan Medis">
+                                                            <option>
+                                                                Unit IGD
+                                                            </option>
+                                                            <option>
+                                                                Unit Rawat Jalan
+                                                            </option>
+                                                            <option>
+                                                                Unit Kamar
+                                                                Operasi
+                                                            </option>
+                                                            <option>
+                                                                Unit
+                                                                Rehabilitasi
+                                                                Medis
+                                                            </option>
+                                                            <option>
+                                                                Unit Pelayanan
+                                                                Dialisis
+                                                            </option>
+                                                        </optgroup>
+                                                        <optgroup label="Bidang Penunjang Medis">
+                                                            <option>
+                                                                Unit Farmasi
+                                                            </option>
+                                                            <option>
+                                                                Unit
+                                                                Laboratorium
+                                                            </option>
+                                                            <option>
+                                                                Unit Radiologi
+                                                            </option>
+                                                            <option>
+                                                                Unit Rekam Medis
+                                                            </option>
+                                                            <option>
+                                                                Unit Gizi
+                                                            </option>
+                                                        </optgroup>
+                                                        <optgroup label="Bidang Keperawatan dan Kebidanan">
+                                                            <option>
+                                                                Unit Rawat Inap
+                                                                1
+                                                            </option>
+                                                            <option>
+                                                                Unit Rawat Inap
+                                                                2
+                                                            </option>
+                                                            <option>
+                                                                Unit Rawat Inap
+                                                                Kebidanan,
+                                                                Kandungan dan
+                                                                NICU
+                                                            </option>
+                                                            <option>
+                                                                Unit Rawat Inap
+                                                                4 dan Geriatri
+                                                            </option>
+                                                            <option>
+                                                                Unit Pelayanan
+                                                                Intensif (ICU)
+                                                            </option>
+                                                        </optgroup>
+                                                        <optgroup label="Bidang Umum dan Keuangan">
+                                                            <option>
+                                                                Unit Human
+                                                                Resources
+                                                                Development
+                                                                (HRD)
+                                                            </option>
+                                                            <option>
+                                                                Unit Pengadaan
+                                                            </option>
+                                                            <option>
+                                                                Unit Umum
+                                                            </option>
+                                                            <option>
+                                                                Unit Customer
+                                                                Service
+                                                            </option>
+                                                        </optgroup>
+                                                        <optgroup label="Sarana dan Prasarana">
+                                                            <option>
+                                                                Unit
+                                                                Pemeliharaan
+                                                                Sarana
+                                                            </option>
+                                                        </optgroup>
+                                                    </select>
+                                                    <button
+                                                        type="button"
+                                                        className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                        onClick={handleSubmit}
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                                        onClick={handleCancel}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -471,403 +601,370 @@ const DataPesanKomplain = ({ user }) => {
                     )}
                     {showLevelOptions && !showReplyForm && (
                         <div className="py-5 px-16 mt-2">
-                            {/* Your level options here */}
-                            <h1 className="text-black font-bold">Level</h1>
-                            <div className="mt-2 flex justify-between">
-                                <div className="flex gap-4 text-sm">
-                                    <div
-                                        className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-green-500 hover:bg-green-600 cursor-pointer"
-                                        style={{
-                                            width: "100px",
-                                            height: "30px",
-                                        }}
-                                        value="green"
-                                        onClick={(e) => {
-                                            setSelectedLevel("green");
-                                            console.log(
-                                                e.target.getAttribute("value")
-                                            );
-                                            {
-                                                /* Cetak nilai ke konsol */
-                                            }
-                                        }}
-                                    >
-                                        {/* Icon atau tanda berwarna hijau */}
-                                        <span>Rendah</span>
-                                    </div>
-                                    <div
-                                        className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
-                                        style={{
-                                            width: "100px",
-                                            height: "30px",
-                                        }}
-                                        value="yellow"
-                                        onClick={(e) => {
-                                            setSelectedLevel("yellow");
-                                            console.log(
-                                                e.target.getAttribute("value")
-                                            );
-                                            {
-                                                /* Cetak nilai ke konsol */
-                                            }
-                                        }}
-                                    >
-                                        {/* Icon atau tanda berwarna kuning */}
-                                        <span>Tinggi</span>
-                                    </div>
-                                    <div
-                                        className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-red-500 hover:bg-red-600 cursor-pointer ml-2"
-                                        style={{
-                                            width: "100px",
-                                            height: "30px",
-                                        }}
-                                        value="red"
-                                        onClick={(e) => {
-                                            setSelectedLevel("red");
-                                            console.log(
-                                                e.target.getAttribute("value")
-                                            );
-                                            {
-                                                /* Cetak nilai ke konsol */
-                                            }
-                                        }}
-                                    >
-                                        {/* Icon atau tanda berwarna merah */}
-                                        <span>Ekstrim</span>
+                            <div className="p-4 border rounded-lg border-black-200">
+                                {/* Your level options here */}
+                                <h1 className="text-black font-bold">Level</h1>
+                                <div className="mt-2 flex justify-between">
+                                    <div className="flex gap-4 text-sm">
+                                        <div
+                                            className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-green-500 hover:bg-green-600 cursor-pointer"
+                                            style={{
+                                                width: "100px",
+                                                height: "30px",
+                                            }}
+                                            value="green"
+                                            onClick={(e) => {
+                                                setSelectedLevel("green");
+                                                console.log(
+                                                    e.target.getAttribute(
+                                                        "value"
+                                                    )
+                                                );
+                                                {
+                                                    /* Cetak nilai ke konsol */
+                                                }
+                                            }}
+                                        >
+                                            {/* Icon atau tanda berwarna hijau */}
+                                            <span>Rendah</span>
+                                        </div>
+                                        <div
+                                            className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
+                                            style={{
+                                                width: "100px",
+                                                height: "30px",
+                                            }}
+                                            value="yellow"
+                                            onClick={(e) => {
+                                                setSelectedLevel("yellow");
+                                                console.log(
+                                                    e.target.getAttribute(
+                                                        "value"
+                                                    )
+                                                );
+                                                {
+                                                    /* Cetak nilai ke konsol */
+                                                }
+                                            }}
+                                        >
+                                            {/* Icon atau tanda berwarna kuning */}
+                                            <span>Tinggi</span>
+                                        </div>
+                                        <div
+                                            className="rounded-full w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-900 border border-gray-400 hover:border-gray-900 bg-red-500 hover:bg-red-600 cursor-pointer ml-2"
+                                            style={{
+                                                width: "100px",
+                                                height: "30px",
+                                            }}
+                                            value="red"
+                                            onClick={(e) => {
+                                                setSelectedLevel("red");
+                                                console.log(
+                                                    e.target.getAttribute(
+                                                        "value"
+                                                    )
+                                                );
+                                                {
+                                                    /* Cetak nilai ke konsol */
+                                                }
+                                            }}
+                                        >
+                                            {/* Icon atau tanda berwarna merah */}
+                                            <span>Ekstrim</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {selectedLevel && (
-                                <div className="mt-4">
-                                    {selectedLevel === "green" && (
-                                        <div className="text-sm">
-                                            <h1>
-                                                *Deskripsi untuk Level Hijau
-                                            </h1>
-                                            <p>Maksimal 7 hari</p>
-                                            <p>
-                                                tidak menimbulkan kerugian
-                                                berarti baik material maupun
-                                                immaterial
-                                            </p>
-                                        </div>
-                                    )}
-                                    {selectedLevel === "yellow" && (
-                                        <div className="text-sm">
-                                            <h1>
-                                                *Deskripsi untuk Level Kuning
-                                            </h1>
-                                            <p>Maksimal 3 hari</p>
-                                            <p>
-                                                cenderung dengan pemberitaan
-                                                media, potensi kerugian
-                                                immaterial, dan lain-lain
-                                            </p>
-                                        </div>
-                                    )}
-                                    {selectedLevel === "red" && (
-                                        <div className="text-sm">
-                                            <h1>
-                                                *Deskripsi untuk Level Merah
-                                            </h1>
-                                            <p>Maksimal 1 hari</p>
-                                            <p>
-                                                cenderung berhubungan dengan
-                                                polisi, pengadilan, kematian,
-                                                mengancam sistem/kelangsungan
-                                                organisasi, potensi kerugian
-                                                material dan lain-lain
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                            {selectedLevel && (
-                                <div>
-                                    {selectedLevel === "green" && (
-                                        <div className="mt-4 text-black font-bold">
-                                            <h2>List Kepala Ruang</h2>
-                                            {/* Daftar kepala ruang untuk level hijau */}
-                                        </div>
-                                    )}
-                                    {selectedLevel === "yellow" && (
-                                        <div className="mt-4 text-black font-bold">
-                                            <h2>
-                                                List Kepala Ruang dan Kepala
-                                                Bidang
-                                            </h2>
-                                            {/* Daftar kepala ruang untuk level kuning */}
-                                        </div>
-                                    )}
-                                    {selectedLevel === "red" && (
-                                        <div className="mt-4 text-black font-bold">
-                                            <h2>List Kepala Bidang</h2>
-                                            {/* Daftar kepala bidang untuk level merah */}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                            <select //PERBAIKANNNNNNNNNNNNNNNN
-                                className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2"
-                                name="penerima"
-                                value={formData.penerima}
-                                onChange={handleChange}
-                            >
-                                {selectedLevel === "green" && (
-                                    <>
-                                        <option className="text-gray-500">
-                                            Pilih Unit
-                                        </option>
-                                        <optgroup label="Kepala Ruang">
-                                            <option>Kepala Ruang IGD</option>
-                                            <option>
-                                                Kepala Ruang Rawat Jalan
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Kamar Operasi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rehabilitasi Medis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pelayanan Dialisis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Farmasi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Laboratorium
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Radiologi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rekam Medis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Unit Gizi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 1
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 2
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap
-                                                Kebidanan, Kandungan dan NICU
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 4 dan
-                                                Geriatri
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pelayanan Intensif
-                                                (ICU)
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Human Resources
-                                                Development (HRD)
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pengadaan
-                                            </option>
-                                            <option>Kepala Ruang Umum</option>
-                                            <option>
-                                                Kepala Ruang Customer Service
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pemeliharaan Sarana
-                                            </option>
-                                        </optgroup>
-                                    </>
+                                {selectedLevel && (
+                                    <div className="mt-4">
+                                        {selectedLevel === "green" && (
+                                            <div className="text-sm">
+                                                <h1>
+                                                    *Deskripsi untuk Level Hijau
+                                                </h1>
+                                                <p>Maksimal 7 hari</p>
+                                                <p>
+                                                    tidak menimbulkan kerugian
+                                                    berarti baik material maupun
+                                                    immaterial
+                                                </p>
+                                            </div>
+                                        )}
+                                        {selectedLevel === "yellow" && (
+                                            <div className="text-sm">
+                                                <h1>
+                                                    *Deskripsi untuk Level
+                                                    Kuning
+                                                </h1>
+                                                <p>Maksimal 3 hari</p>
+                                                <p>
+                                                    cenderung dengan pemberitaan
+                                                    media, potensi kerugian
+                                                    immaterial, dan lain-lain
+                                                </p>
+                                            </div>
+                                        )}
+                                        {selectedLevel === "red" && (
+                                            <div className="text-sm">
+                                                <h1>
+                                                    *Deskripsi untuk Level Merah
+                                                </h1>
+                                                <p>Maksimal 1 hari</p>
+                                                <p>
+                                                    cenderung berhubungan dengan
+                                                    polisi, pengadilan,
+                                                    kematian, mengancam
+                                                    sistem/kelangsungan
+                                                    organisasi, potensi kerugian
+                                                    material dan lain-lain
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
                                 )}
-
-                                {selectedLevel === "yellow" && (
-                                    <>
-                                        <option className="text-gray-500">
-                                            Pilih Unit
-                                        </option>
-                                        <optgroup label="Kepala Ruang">
-                                            <option>Kepala Ruang IGD</option>
-                                            <option>
-                                                Kepala Ruang Rawat Jalan
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Kamar Operasi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rehabilitasi Medis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pelayanan Dialisis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Farmasi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Laboratorium
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Radiologi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rekam Medis
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Unit Gizi
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 1
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 2
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap
-                                                Kebidanan, Kandungan dan NICU
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Rawat Inap 4 dan
-                                                Geriatri
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pelayanan Intensif
-                                                (ICU)
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Human Resources
-                                                Development (HRD)
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pengadaan
-                                            </option>
-                                            <option>Kepala Ruang Umum</option>
-                                            <option>
-                                                Kepala Ruang Customer Service
-                                            </option>
-                                            <option>
-                                                Kepala Ruang Pemeliharaan Sarana
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label=" "></optgroup>
-
-                                        <optgroup label="Kepala Bidang">
-                                            <option className="">
-                                                Kepala Bidang Pelayanan Medis
-                                            </option>
-                                            <option className="">
-                                                Kepala Bidang Penunjang Medis
-                                            </option>
-                                            <option className="">
-                                                Kepala Bidang Keperawatan dan
-                                                Kebidanan
-                                            </option>
-                                            <option className="">
-                                                Kepala Bidang Umum dan Kuangan
-                                            </option>
-                                        </optgroup>
-                                    </>
+                                {selectedLevel && (
+                                    <div>
+                                        {selectedLevel === "green" && (
+                                            <div className="mt-4 text-black font-bold">
+                                                <h2>List Kepala Ruang</h2>
+                                                {/* Daftar kepala ruang untuk level hijau */}
+                                            </div>
+                                        )}
+                                        {selectedLevel === "yellow" && (
+                                            <div className="mt-4 text-black font-bold">
+                                                <h2>
+                                                    List Kepala Ruang dan Kepala
+                                                    Bidang
+                                                </h2>
+                                                {/* Daftar kepala ruang untuk level kuning */}
+                                            </div>
+                                        )}
+                                        {selectedLevel === "red" && (
+                                            <div className="mt-4 text-black font-bold">
+                                                <h2>List Kepala Bidang</h2>
+                                                {/* Daftar kepala bidang untuk level merah */}
+                                            </div>
+                                        )}
+                                    </div>
                                 )}
-
-                                {selectedLevel === "red" && (
-                                    <>
-                                        <option className="text-gray-500">
-                                            Pilih Unit
-                                        </option>
-                                        <optgroup label="Kepala Bidang">
-                                            <option>
-                                                Kepala Bidang Pelayanan Medis
-                                            </option>
-                                            <option>
-                                                Kepala Bidang Penunjang Medis
-                                            </option>
-                                            <option>
-                                                Kepala Bidang Keperawatan dan
-                                                Kebidanan
-                                            </option>
-                                            <option>
-                                                Kepala Bidang Umum dan Kuangan
-                                            </option>
-                                        </optgroup>
-                                    </>
-                                )}
-                            </select>
-                            <div className="mt-6 flex items-center justify-end gap-x-6">
-                                <button
-                                    type="submit"
-                                    className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={handleEditLevel}
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                    {showGantiunit && (
-                        <div className="mt-2">
-                            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <select
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    name="unit"
-                                    value={formData.unit}
+                                    className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2"
+                                    name="penerima"
+                                    value={formData.penerima}
                                     onChange={handleChange}
                                 >
-                                    <option disabled selected>
-                                        Pilih unit
-                                    </option>
-                                    <optgroup label="Bidang Pelayanan Medis">
-                                        <option>Unit IGD</option>
-                                        <option>Unit Rawat Jalan</option>
-                                        <option>Unit Kamar Operasi</option>
-                                        <option>Unit Rehabilitasi Medis</option>
-                                        <option>Unit Pelayanan Dialisis</option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Penunjang Medis">
-                                        <option>Unit Farmasi</option>
-                                        <option>Unit Laboratorium</option>
-                                        <option>Unit Radiologi</option>
-                                        <option>Unit Rekam Medis</option>
-                                        <option>Unit Gizi</option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Keperawatan dan Kebidanan">
-                                        <option>Unit Rawat Inap 1</option>
-                                        <option>Unit Rawat Inap 2</option>
-                                        <option>
-                                            Unit Rawat Inap Kebidanan, Kandungan
-                                            dan NICU
-                                        </option>
-                                        <option>
-                                            Unit Rawat Inap 4 dan Geriatri
-                                        </option>
-                                        <option>
-                                            Unit Pelayanan Intensif (ICU)
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Umum dan Keuangan">
-                                        <option>
-                                            Unit Human Resources Development
-                                            (HRD)
-                                        </option>
-                                        <option>Unit Pengadaan</option>
-                                        <option>Unit Umum</option>
-                                        <option>Unit Customer Service</option>
-                                    </optgroup>
-                                    <optgroup label="Sarana dan Prasarana">
-                                        <option>
-                                            Unit Pemeliharaan Sarana
-                                        </option>
-                                    </optgroup>
+                                    {selectedLevel === "green" && (
+                                        <>
+                                            <option className="text-gray-500">
+                                                Pilih Unit
+                                            </option>
+                                            <optgroup label="Kepala Ruang">
+                                                <option>
+                                                    Kepala Ruang IGD
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Jalan
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Kamar Operasi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rehabilitasi
+                                                    Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pelayanan
+                                                    Dialisis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Farmasi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Laboratorium
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Radiologi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rekam Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Unit Gizi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 1
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 2
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap
+                                                    Kebidanan, Kandungan dan
+                                                    NICU
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 4
+                                                    dan Geriatri
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pelayanan
+                                                    Intensif (ICU)
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Human Resources
+                                                    Development (HRD)
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pengadaan
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Umum
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Customer
+                                                    Service
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pemeliharaan
+                                                    Sarana
+                                                </option>
+                                            </optgroup>
+                                        </>
+                                    )}
+
+                                    {selectedLevel === "yellow" && (
+                                        <>
+                                            <option className="text-gray-500">
+                                                Pilih Unit
+                                            </option>
+                                            <optgroup label="Kepala Ruang">
+                                                <option>
+                                                    Kepala Ruang IGD
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Jalan
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Kamar Operasi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rehabilitasi
+                                                    Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pelayanan
+                                                    Dialisis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Farmasi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Laboratorium
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Radiologi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rekam Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Unit Gizi
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 1
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 2
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap
+                                                    Kebidanan, Kandungan dan
+                                                    NICU
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Rawat Inap 4
+                                                    dan Geriatri
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pelayanan
+                                                    Intensif (ICU)
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Human Resources
+                                                    Development (HRD)
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pengadaan
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Umum
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Customer
+                                                    Service
+                                                </option>
+                                                <option>
+                                                    Kepala Ruang Pemeliharaan
+                                                    Sarana
+                                                </option>
+                                            </optgroup>
+                                            <optgroup label=" "></optgroup>
+
+                                            <optgroup label="Kepala Bidang">
+                                                <option className="">
+                                                    Kepala Bidang Pelayanan
+                                                    Medis
+                                                </option>
+                                                <option className="">
+                                                    Kepala Bidang Penunjang
+                                                    Medis
+                                                </option>
+                                                <option className="">
+                                                    Kepala Bidang Keperawatan
+                                                    dan Kebidanan
+                                                </option>
+                                                <option className="">
+                                                    Kepala Bidang Umum dan
+                                                    Kuangan
+                                                </option>
+                                            </optgroup>
+                                        </>
+                                    )}
+
+                                    {selectedLevel === "red" && (
+                                        <>
+                                            <option className="text-gray-500">
+                                                Pilih Unit
+                                            </option>
+                                            <optgroup label="Kepala Bidang">
+                                                <option>
+                                                    Kepala Bidang Pelayanan
+                                                    Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Bidang Penunjang
+                                                    Medis
+                                                </option>
+                                                <option>
+                                                    Kepala Bidang Keperawatan
+                                                    dan Kebidanan
+                                                </option>
+                                                <option>
+                                                    Kepala Bidang Umum dan
+                                                    Kuangan
+                                                </option>
+                                            </optgroup>
+                                        </>
+                                    )}
                                 </select>
-                            </div>
-                            <div className="mt-6 flex items-center justify-end gap-x-6">
-                                <button
-                                    type="submit"
-                                    className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={handleSubmit}
-                                >
-                                    Submit
-                                </button>
+                                <div className="mt-6 flex items-center justify-end gap-x-6">
+                                    <button
+                                        type="submit"
+                                        className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        onClick={handleEditLevel}
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}

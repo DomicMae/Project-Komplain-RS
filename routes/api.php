@@ -75,6 +75,10 @@ Route::get('/sendemailCSOAgain', [kirimEmailController::class, 'returnToCso'])->
 Route::post('/sendemailToKepalaRuang', [kirimEmailController::class, 'indexKepalaRuang'])->name('send.email.to.kepalaRuang');
 //Route untuk mengirim email kepada kepala bidang
 Route::post('/sendemailToKepalaBidang', [kirimEmailController::class, 'indexKepalaBidang'])->name('send.email.to.kepalaBidang');
+//Route untuk mengirim email ketika laporan akan dikirimkan ke CSO
+Route::post('/sendemailToCSOKepalaRuang', [kirimEmailController::class, 'kirimLaporanKepalaRuang'])->name('send.email.to.CSO');
+//Route untuk mengirim email ketika laporan akan dikirimkan ke CSO
+Route::post('/sendemailToCSOKepalaBidang', [kirimEmailController::class, 'kirimLaporanKepalaBidang'])->name('send.email.to.CSO');
 // Route untuk mengirim email setelah komplain lewat 30 menit
 Route::get('/sendemailforCSO', [kirimEmailController::class, 'countdown_cso'])->name('send.email.after.a.minute');
 

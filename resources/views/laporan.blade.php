@@ -61,17 +61,16 @@
     <h1> <span> <img src="/images/Logo_Background.png" alt="Logo Background" width="30" height="30"> </span> <span class="b"> Rumah Sakit</span> <span class="a"> Gotong Royong </span></h1>
     <br>
     <h1 class="a">Laporan Komplain</h1>
-    <p class="penerima">Penerima : {{ $komplain->penerima }}</p>
-    <p class="c">Jenis Pasien : {{ $komplain->jenis_pasien }}</p>
     <p class="c">Nama Pasien : {{ $komplain->nama }}</p>
+    <p class="c">Jenis Pasien : {{ $komplain->jenis_pasien }}</p>
     <p class="c">Judul Komplain : {{ $komplain->judul }}</p>
     <p class="c">Kronologi : {{ $komplain->kronologi }}</p>
-    <p class="laporan">Laporan :</p>
-    <p class="c">{{ $komplain->laporan }}</p>
+    <p class="penerima">Penerima : {{ $komplain->penerima }}</p>
+    <p class="laporan">Laporan : {{ $komplain->laporan }}</p>
     @if ($komplain->gambar)
-        <img src="{{ public_path('uploads/images/' . $komplain->gambar) }}" alt="Gambar Komplain" style="max-width: 100%; height: auto;">
+    <img src="{{ public_path('uploads/images/' . $komplain->gambar) }}" alt="Gambar Komplain" style="max-width: 225px; max-height: 225px; width: auto; height: auto;">
     @else
-        <p>Gambar: Tidak ada gambar</p>
+        <p>Gambar : Tidak ada gambar</p>
     @endif
 </body>
 </html>

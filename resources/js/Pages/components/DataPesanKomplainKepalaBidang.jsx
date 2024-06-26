@@ -6,6 +6,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
     const [komplainDetail, setKomplainDetail] = useState(null);
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [timeRemaining, setTimeRemaining] = useState(0);
+    const [daysRemaining, setDaysRemaining] = useState(0);
     const [duration, setDuration] = useState(null);
     const [selectedPenerima, setSelectedPenerima] = useState(""); // State untuk menyimpan penerima yang dipilih
 
@@ -21,6 +22,10 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
             ...prevState,
             [name]: value,
         }));
+    };
+
+    const handleCancel = () => {
+        setShowDropdown(false);
     };
 
     const handleSelectChange = (e) => {
@@ -231,6 +236,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                     timeRemainingInSeconds
                 );
                 setTimeRemaining(formattedTimeRemaining);
+                setDaysRemaining(convertTimeToDays(formattedTimeRemaining));
             })
             .catch((error) => {
                 if (error.response && error.response.status === 429) {
@@ -258,6 +264,14 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
         ].join(":");
 
         return formattedTime;
+    };
+
+    // Fungsi untuk mengonversi "HH:MM:SS" menjadi hari
+    const convertTimeToDays = (timeString) => {
+        const [hours, minutes, seconds] = timeString.split(":").map(Number);
+        const totalHours = hours + minutes / 60 + seconds / 3600;
+        const totalDays = totalHours / 24;
+        return Math.floor(totalDays); // Membulatkan ke bawah ke bilangan bulat terdekat
     };
 
     const getTimeRemaining = (start, end) => {
@@ -295,6 +309,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
     const [showLevelOptions, setShowLevelOptions] = useState(false);
     const [showGantiunit, setShowGantiunit] = useState(false);
     const [showSelesai, setShowSelesai] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const handleShowLevelOptionsClick = () => {
         setShowLevelOptions(true);
@@ -306,6 +321,7 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
         setShowReplyForm(false);
         setShowLevelOptions(false);
         setShowGantiunit(true);
+        setShowDropdown(!showDropdown);
     };
     const handleShowReplyForm = () => {
         addCountdown(); // Memanggil fungsi addCountdown saat tombol "Terima" diklik
@@ -357,28 +373,168 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                             <div className="border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2">
                                                 {komplainDetail.unit}
                                             </div>
-                                            <button
-                                                className="w-32 flex items-center justify-center space-x-2 py-1.5 text-gray-600 hover:bg-gray-200"
-                                                style={{
-                                                    width: "20px",
-                                                    height: "20px",
-                                                }}
-                                                onClick={
-                                                    handleShowGantiunitClick
-                                                }
+                                            <div
+                                                className={`border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2 ml-2 text-center ${
+                                                    komplainDetail.namaLevel ===
+                                                    "Merah"
+                                                        ? "bg-red-500"
+                                                        : "bg-yellow-500"
+                                                }`}
                                             >
-                                                <SquarePen />
-                                            </button>
-                                        </div>
-                                        <div
-                                            className={`border border-black bg-gray-0 rounded-full px-3 text-black inline-block ml-2 text-center ${
-                                                komplainDetail.namaLevel ===
-                                                "Merah"
-                                                    ? "bg-red-500"
-                                                    : "bg-yellow-500"
-                                            }`}
-                                        >
-                                            Level {komplainDetail.namaLevel}
+                                                Level {komplainDetail.namaLevel}
+                                            </div>
+                                            {!showDropdown && (
+                                                <button
+                                                    id="dropdownDefaultButton"
+                                                    data-dropdown-toggle="dropdown"
+                                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                    type="button"
+                                                    onClick={
+                                                        handleShowGantiunitClick
+                                                    }
+                                                >
+                                                    Ganti Unit
+                                                </button>
+                                            )}
+                                            <div>
+                                                {showDropdown && (
+                                                    <div className="flex items-center gap-x-4">
+                                                        <select
+                                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                            name="unit"
+                                                            value={
+                                                                formData.unit
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                        >
+                                                            <option
+                                                                value=""
+                                                                disabled
+                                                            >
+                                                                Pilih unit
+                                                            </option>
+                                                            <optgroup label="Bidang Pelayanan Medis">
+                                                                <option>
+                                                                    Unit IGD
+                                                                </option>
+                                                                <option>
+                                                                    Unit Rawat
+                                                                    Jalan
+                                                                </option>
+                                                                <option>
+                                                                    Unit Kamar
+                                                                    Operasi
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Rehabilitasi
+                                                                    Medis
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Pelayanan
+                                                                    Dialisis
+                                                                </option>
+                                                            </optgroup>
+                                                            <optgroup label="Bidang Penunjang Medis">
+                                                                <option>
+                                                                    Unit Farmasi
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Laboratorium
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Radiologi
+                                                                </option>
+                                                                <option>
+                                                                    Unit Rekam
+                                                                    Medis
+                                                                </option>
+                                                                <option>
+                                                                    Unit Gizi
+                                                                </option>
+                                                            </optgroup>
+                                                            <optgroup label="Bidang Keperawatan dan Kebidanan">
+                                                                <option>
+                                                                    Unit Rawat
+                                                                    Inap 1
+                                                                </option>
+                                                                <option>
+                                                                    Unit Rawat
+                                                                    Inap 2
+                                                                </option>
+                                                                <option>
+                                                                    Unit Rawat
+                                                                    Inap
+                                                                    Kebidanan,
+                                                                    Kandungan
+                                                                    dan NICU
+                                                                </option>
+                                                                <option>
+                                                                    Unit Rawat
+                                                                    Inap 4 dan
+                                                                    Geriatri
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Pelayanan
+                                                                    Intensif
+                                                                    (ICU)
+                                                                </option>
+                                                            </optgroup>
+                                                            <optgroup label="Bidang Umum dan Keuangan">
+                                                                <option>
+                                                                    Unit Human
+                                                                    Resources
+                                                                    Development
+                                                                    (HRD)
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Pengadaan
+                                                                </option>
+                                                                <option>
+                                                                    Unit Umum
+                                                                </option>
+                                                                <option>
+                                                                    Unit
+                                                                    Customer
+                                                                    Service
+                                                                </option>
+                                                            </optgroup>
+                                                            <optgroup label="Sarana dan Prasarana">
+                                                                <option>
+                                                                    Unit
+                                                                    Pemeliharaan
+                                                                    Sarana
+                                                                </option>
+                                                            </optgroup>
+                                                        </select>
+                                                        <button
+                                                            type="button"
+                                                            className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                            onClick={
+                                                                handleSubmit
+                                                            }
+                                                        >
+                                                            Submit
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                                            onClick={
+                                                                handleCancel
+                                                            }
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -440,6 +596,9 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                                     </p>
                                     <p className="text-center">
                                         {timeRemaining}
+                                    </p>
+                                    <p className="text-center">
+                                        ({daysRemaining} hari)
                                     </p>
                                 </div>
                             </div>
@@ -625,73 +784,6 @@ const DataPesanKomplainKepalaBidang = ({ user }) => {
                             >
                                 Kembali ke daftar
                             </button>
-                        </div>
-                    )}
-                    {showGantiunit && (
-                        <div className="mt-2">
-                            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <select
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    name="unit"
-                                    value={formData.unit}
-                                    onChange={handleChange}
-                                >
-                                    <option disabled selected>
-                                        Pilih unit
-                                    </option>
-                                    <optgroup label="Bidang Pelayanan Medis">
-                                        <option>Unit IGD</option>
-                                        <option>Unit Rawat Jalan</option>
-                                        <option>Unit Kamar Operasi</option>
-                                        <option>Unit Rehabilitasi Medis</option>
-                                        <option>Unit Pelayanan Dialisis</option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Penunjang Medis">
-                                        <option>Unit Farmasi</option>
-                                        <option>Unit Laboratorium</option>
-                                        <option>Unit Radiologi</option>
-                                        <option>Unit Rekam Medis</option>
-                                        <option>Unit Gizi</option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Keperawatan dan Kebidanan">
-                                        <option>Unit Rawat Inap 1</option>
-                                        <option>Unit Rawat Inap 2</option>
-                                        <option>
-                                            Unit Rawat Inap Kebidanan, Kandungan
-                                            dan NICU
-                                        </option>
-                                        <option>
-                                            Unit Rawat Inap 4 dan Geriatri
-                                        </option>
-                                        <option>
-                                            Unit Pelayanan Intensif (ICU)
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Bidang Umum dan Keuangan">
-                                        <option>
-                                            Unit Human Resources Development
-                                            (HRD)
-                                        </option>
-                                        <option>Unit Pengadaan</option>
-                                        <option>Unit Umum</option>
-                                        <option>Unit Customer Service</option>
-                                    </optgroup>
-                                    <optgroup label="Sarana dan Prasarana">
-                                        <option>
-                                            Unit Pemeliharaan Sarana
-                                        </option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div className="mt-6 flex items-center justify-end gap-x-6">
-                                <button
-                                    type="submit"
-                                    className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={handleSubmit}
-                                >
-                                    Submit
-                                </button>
-                            </div>
                         </div>
                     )}
                 </div>

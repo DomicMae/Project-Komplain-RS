@@ -232,7 +232,7 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://193.168.195.191/api/dataKomplainKepalaBidang/${id}`
+                    `http://193.168.195.191/api/dataKomplainById/${id}`
                 );
                 setKomplainDetail(response.data);
 

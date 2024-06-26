@@ -121,7 +121,9 @@ const IsiKomplainCustomer = ({ user }) => {
                         <div className="border border-black rounded-md inline-block p-5">
                             <p className="text-right">Penerima</p>
                             <p className="text-right">
-                                {komplainDetail.penerima}
+                                {komplainDetail.penerima
+                                    ? komplainDetail.penerima
+                                    : "tidak ada"}
                             </p>
                         </div>
                     </div>

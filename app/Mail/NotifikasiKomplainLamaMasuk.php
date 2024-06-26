@@ -29,7 +29,7 @@ class NotifikasiKomplainLamaMasuk extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notifikasi Komplain Lama Masuk',
+            subject: 'Notifikasi Komplain Lama Kembali Masuk',
         );
     }
 

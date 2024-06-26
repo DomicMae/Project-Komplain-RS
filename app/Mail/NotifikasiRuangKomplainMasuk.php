@@ -29,7 +29,7 @@ class NotifikasiRuangKomplainMasuk extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notifikasi Komplain Masuk',
+            subject: 'Notifikasi Komplain Masuk dari CSO',
         );
     }
 

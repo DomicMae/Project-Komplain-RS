@@ -9,11 +9,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NotifikasiKomplainMasuk extends Mailable
+class KirimLaporanKepalaBidang extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data_email; 
+    public $data_email;
 
     /**
      * Create a new message instance.
@@ -29,7 +29,7 @@ class NotifikasiKomplainMasuk extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notifikasi Komplain Baru Masuk',
+            subject: 'Notifikasi Laporan Komplain Masuk dari Kepala Bidang',
         );
     }
 
@@ -39,7 +39,7 @@ class NotifikasiKomplainMasuk extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.notifikasi_komplain_masuk',
+            view: 'emails.notifikasi_laporankomplainBidang_masuk',
             with: ['data_email' => $this->data_email]
         );
     }

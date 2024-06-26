@@ -238,10 +238,11 @@ const CekCodePage = ({ title, description }) => {
                     {kodeData && (
                         <div>
                             <h3>{kodeData.title}</h3>
-                            <p>Nama: {kodeData.nama}</p>
-                            <p>Kronologi: {kodeData.kronologi}</p>
+                            <p>Nama : {kodeData.nama}</p>
+                            <p>Judul : {kodeData.judul}</p>
+                            <p>Kronologi : {kodeData.kronologi}</p>
                             <p>
-                                Tanggal: {tanggal} {bulan} {tahun}
+                                Tanggal : {tanggal} {bulan} {tahun}
                             </p>
                         </div>
                     )}
@@ -292,7 +293,7 @@ const CekCodePage = ({ title, description }) => {
                                 <button
                                     type="submit"
                                     onClick={handleLaporan}
-                                    className="rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Cek Laporan Komplain
                                 </button>
