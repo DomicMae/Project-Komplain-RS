@@ -362,25 +362,25 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
                                             <div className="border border-black bg-gray-0 rounded-full px-3 text-black inline-block mr-2">
                                                 {komplainDetail.unit}
                                             </div>
-                                        </div>
-                                        <div
-                                            className={`border border-black bg-gray-0 rounded-full px-3 text-black inline-block ml-2 text-center ${
-                                                komplainDetail.namaLevel ===
-                                                "Tidak ada"
-                                                    ? "bg-white-500"
-                                                    : komplainDetail.namaLevel ===
-                                                      "Hijau"
-                                                    ? "bg-green-500"
-                                                    : komplainDetail.namaLevel ===
-                                                      "Kuning"
-                                                    ? "bg-yellow-500"
-                                                    : komplainDetail.namaLevel ===
-                                                      "Merah"
-                                                    ? "bg-red-500"
-                                                    : ""
-                                            }`}
-                                        >
-                                            Level {komplainDetail.namaLevel}
+                                            <div
+                                                className={`border border-black bg-gray-0 rounded-full px-3 text-black inline-block ml-2 text-center ${
+                                                    komplainDetail.namaLevel ===
+                                                    "Tidak ada"
+                                                        ? "bg-white-500"
+                                                        : komplainDetail.namaLevel ===
+                                                          "Hijau"
+                                                        ? "bg-green-500"
+                                                        : komplainDetail.namaLevel ===
+                                                          "Kuning"
+                                                        ? "bg-yellow-500"
+                                                        : komplainDetail.namaLevel ===
+                                                          "Merah"
+                                                        ? "bg-red-500"
+                                                        : ""
+                                                }`}
+                                            >
+                                                Level {komplainDetail.namaLevel}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
