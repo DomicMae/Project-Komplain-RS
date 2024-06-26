@@ -251,8 +251,6 @@ const DataPesanRiwayatKomplainCSO = ({ user }) => {
 
     const handleLaporan = async (e) => {
         e.preventDefault();
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("id");
 
         try {
             // Cek apakah ada laporan dalam respons data.kode
