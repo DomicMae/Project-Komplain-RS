@@ -596,7 +596,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
                                 {/* Tampilkan gambar hanya jika ada */}
                                 <img
                                     src={`/uploads/${komplainDetail.gambar}`}
-                                    className="w-48 h-48 border border-gray-900"
+                                    className="h-48 border border-gray-900"
                                 />
                             </div>
                         )}
