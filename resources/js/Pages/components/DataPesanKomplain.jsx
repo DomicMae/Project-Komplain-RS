@@ -292,12 +292,12 @@ const DataPesanKomplain = ({ user }) => {
         setShowReplyForm(false);
         setShowLevelOptions(false);
         setShowGantiunit(true);
+        setShowDropdown(!showDropdown);
     };
     const handleShowReplyForm = () => {
         setShowReplyForm(true);
         setShowLevelOptions(false);
         setShowGantiunit(false); // Pastikan showLevelOptions diubah menjadi false
-        setShowDropdown(!showDropdown);
     };
 
     const handleShowSelesai = () => {
