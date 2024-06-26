@@ -72,6 +72,8 @@ const DataPesanKomplainKepalaRuang = ({ user }) => {
             id_status: statusId, // Mengirim nilai baru untuk kolom idStatus
         };
 
+        console.log("Mengirim data:", statusId);
+
         axios
             .post("http://193.168.195.191/api/editStatus", formDataToSend)
             .then((response) => {

@@ -85,6 +85,8 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
             formData.append("gambar", gambarFile);
         }
 
+        console.log("Mengirim data:", formData);
+
         try {
             const response = await axios.post(
                 "http://193.168.195.191/api/reply",
@@ -138,6 +140,8 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
             id_status: statusId, // Mengirim nilai baru untuk kolom idStatus
             keterangan: keterangan, //Mengirim value selesai
         };
+
+        console.log("Mengirim data:", formDataToSend);
 
         axios
             .post("http://193.168.195.191/api/editStatus", formDataToSend)
