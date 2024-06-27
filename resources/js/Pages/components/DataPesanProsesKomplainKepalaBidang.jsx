@@ -110,7 +110,7 @@ const DataPesanProsesKomplainKepalaBidang = ({ user }) => {
 
             try {
                 const emailResponse = await axios.post(
-                    "http://127.0.0.1:8000/api/sendemailToCSOKepalaBidang",
+                    "http://193.168.195.191/api/sendemailToCSOKepalaBidang",
                     emailData
                 );
                 console.log("Email sent successfully:", emailResponse.data);
