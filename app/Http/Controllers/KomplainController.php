@@ -172,12 +172,6 @@ public function getDataRiwayatKomplainAllLevel()
 {  
     $komplains = Komplain::join('level_komplain', 'komplain.id_level', '=', 'level_komplain.id')
         ->where(function($query) {
-            $query->where('komplain.id_level', 1)
-                ->orWhere('komplain.id_level', 2)
-                ->orWhere('komplain.id_level', 3)
-                ->orWhere('komplain.id_level', 4);
-        })
-        ->where(function($query) {
             $query->where('komplain.id_status', 1)
             ->orWhere('komplain.id_status', 5);
         })
