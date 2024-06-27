@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CountdownCSO;
 use App\Mail\KirimLaporanKepalaBidang;
 use App\Mail\KirimLaporanKepalaRuang;
+use App\Mail\KirimLaporanKepalaRuangBlade;
 use App\Mail\NotifikasiBidangKomplainMasuk;
 use App\Mail\NotifikasiKomplainLamaMasuk;
 use App\Models\Komplain;
@@ -152,7 +153,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('KirimLaporanKepalaRuang run');
 
-        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaRuang($data_email));
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaRuangBlade($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
