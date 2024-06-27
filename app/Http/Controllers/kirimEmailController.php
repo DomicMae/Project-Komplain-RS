@@ -153,7 +153,7 @@ class kirimEmailController extends Controller
         $start_time = now();
         Log::info('KirimLaporanKepalaRuang run');
 
-        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaBidang($data_email));
+        Mail::to(["ardontallan0904@gmail.com", "ardonyunors147@gmail.com"])->send(new KirimLaporanKepalaRuang($data_email));
 
         // Catat waktu selesai pengiriman email
         $end_time = now();
