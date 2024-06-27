@@ -214,8 +214,7 @@ const DataDaftarKomplain = ({ user }) => {
                                     {/* Grid 03: countdown */}
                                     <div className="flex">
                                         <p className="text-sm font-semibold mb-2 text-center text-black">
-                                            Countdown:{" "}
-                                            {getCountdown(komplain.created_at)}
+                                            {komplain.id_status}
                                         </p>
                                     </div>
                                     {/* Grid 04: unit */}
