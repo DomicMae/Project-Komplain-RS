@@ -127,7 +127,7 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
             console.error(error);
         }
     };
-    const editStatus = () => {
+    const editStatus = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
         // Mengambil ID komplain dari formulir atau sumber lainnya
@@ -368,11 +368,15 @@ const DataPesanProsesKomplainKepalaRuang = ({ user }) => {
         setShowGantiunit(true);
         setShowDropdown(!showDropdown);
     };
-    const handleShowReplyForm = () => {
+    const handleShowReplyForm = async () => {
         addCountdown(); // Memanggil fungsi addCountdown saat tombol "Terima" diklik
-        editStatus();
+        try {
+            await editStatus(); // Tunggu hingga editStatus selesai
+            sendLiveTracking();
+        } catch (error) {
+            console.error("Kesalahan saat memperbarui status:", error);
+        }
         setShowReplyForm(true);
-        sendLiveTracking();
         setShowLevelOptions(false);
         setShowGantiunit(false); // Pastikan showLevelOptions diubah menjadi false
         setShowSelesai(true);
