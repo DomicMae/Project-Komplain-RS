@@ -1,6 +1,5 @@
 import Navbar from "@/Pages/components/NavbarCustomer";
-import { Inertia } from "@inertiajs/inertia";
-import { Head } from "@inertiajs/react";
+import { router, Head } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function EditKomplain(props) {
@@ -15,7 +14,7 @@ export default function EditKomplain(props) {
             nama,
             kronologi,
         };
-        Inertia.post("/komplain/update", data);
+        router.post("/komplain/update", data);
         setTitle("");
         setNama("");
         setKronologi("");

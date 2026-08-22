@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Inertia } from "@inertiajs/inertia";
-import { Link, Head } from "@inertiajs/react";
+import { router, Link, Head } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
@@ -15,7 +14,7 @@ export default function Dashboard(props) {
             nama,
             kronologi,
         };
-        Inertia.post("/komplain", data);
+        router.post("/komplain", data);
         setisNotif(true);
         setTitle("");
         setNama("");

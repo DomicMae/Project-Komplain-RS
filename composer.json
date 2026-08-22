@@ -8,17 +8,16 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2.16",
-        "barryvdh/laravel-dompdf": "^2.2",
+        "php": "^8.1 || ^8.2",
+        "barryvdh/laravel-dompdf": "^3.0",
         "doctrine/dbal": "^3.0",
-        "fruitcake/laravel-cors": "dev-develop",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.4.0",
         "laravel/tinker": "^2.7",
         "spatie/laravel-permission": "^6.7",
-        "tecnickcom/tcpdf": "^6.7",
+        "tecnickcom/tcpdf": "^6.8",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
@@ -66,6 +65,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "8.1.10"
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
