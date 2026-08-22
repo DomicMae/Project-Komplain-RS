@@ -1,0 +1,1 @@
+import{r as e,t}from"./app-CyDuwlBD.js";import n from"./BodyAboutKomplain-BXxJmc_t.js";import r from"./NavbarCustomer-DzkznZk1.js";var i=t();function a(t){return(0,i.jsxs)(`div`,{className:`min-h-screen bg-slate-50`,children:[(0,i.jsx)(e,{title:t.title}),(0,i.jsxs)(`main`,{children:[(0,i.jsx)(r,{}),(0,i.jsx)(n,{})]})]})}export{a as default};

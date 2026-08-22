@@ -1,1 +1,0 @@
-import{r as e,t}from"./app-CL8vP-9C.js";import n from"./NavbarCustomer-CqDeOlDP.js";import r from"./BodyFeedback-C9v_PPM9.js";var i=t();function a(t){return(0,i.jsxs)(`div`,{className:`min-h-screen bg-slate-50`,children:[(0,i.jsx)(e,{title:t.title}),(0,i.jsxs)(`main`,{children:[(0,i.jsx)(n,{}),(0,i.jsx)(r,{})]})]})}export{a as default};

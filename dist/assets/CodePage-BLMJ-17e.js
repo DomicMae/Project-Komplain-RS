@@ -1,0 +1,1 @@
+import{r as e,t}from"./app-CyDuwlBD.js";import n from"./NavbarCustomer-DzkznZk1.js";import r from"./CekCodePage-Bowlsr1k.js";var i=t();function a(t){return(0,i.jsxs)(`div`,{className:`min-h-screen bg-slate-50`,children:[(0,i.jsx)(e,{title:t.title}),(0,i.jsxs)(`main`,{children:[(0,i.jsx)(n,{user:t.auth.user}),(0,i.jsx)(r,{})]})]})}export{a as default};
